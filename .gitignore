@@ -1,0 +1,7 @@
+# git过滤文件
+**/target/
+.idea
+*.iml
+*.class
+*Test.java
+**/test/

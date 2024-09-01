@@ -1,0 +1,14 @@
+server:
+  port: ${token.server.port}
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${token.datasource.driver-class-name}
+      url: jdbc:msql://${token.datasource.host}:${token.datasource.port}/${token.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${token.datasource.username}
+      password: ${token.datasource.password}
