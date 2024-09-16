@@ -2,18 +2,19 @@ package com.token.service.impl;
 
 import com.token.constant.JwtClaimsConstant;
 import com.token.constant.MessageConstant;
+import com.token.constant.PassWordConstant;
 import com.token.constant.StatusConstant;
 import com.token.dto.EmployeeLoginDTO;
 import com.token.entity.Employee;
 import com.token.exception.AccountIsDisableException;
 import com.token.exception.AccountNotExistException;
 import com.token.exception.PasswordErrorException;
+import com.token.exception.UsernameIsExistException;
 import com.token.mapper.EmployeeMapper;
 import com.token.properties.JwtProperties;
 import com.token.service.EmployeeService;
 import com.token.utils.JwtUtil;
 import com.token.vo.EmployeeLoginVO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -22,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -68,5 +68,19 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .username(employee.getUsername())
                 .token(token)
                 .build();
+    }
+
+    /**
+     * 新增员工-用户名是唯一标识
+     * @param employee
+     */
+    public void insert(Employee employee) {
+        Employee ByEmployee = employeeMapper.getByUsername(employee.getUsername());
+        if (ByEmployee != null){
+            throw new UsernameIsExistException(MessageConstant.USERNAME_IS_EXIST);
+        }
+        employee.setPassword(DigestUtils.md5DigestAsHex(PassWordConstant.DEFAULT_PASSWORD.getBytes()));
+        employee.setStatus(StatusConstant.DISABLE);
+        employeeMapper.insert(employee);
     }
 }

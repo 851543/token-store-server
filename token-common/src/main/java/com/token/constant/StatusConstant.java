@@ -1,5 +1,8 @@
 package com.token.constant;
 
+/**
+ * 状态相关常量
+ */
 public interface StatusConstant {
 
     /**

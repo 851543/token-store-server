@@ -1,6 +1,7 @@
 package com.token.service;
 
 import com.token.dto.EmployeeLoginDTO;
+import com.token.entity.Employee;
 import com.token.vo.EmployeeLoginVO;
 
 public interface EmployeeService {
@@ -11,4 +12,10 @@ public interface EmployeeService {
      * @return
      */
     EmployeeLoginVO login(EmployeeLoginDTO employeeLoginDTO);
+
+    /**
+     * 新增员工
+     * @param employee
+     */
+    void insert(Employee employee);
 }
