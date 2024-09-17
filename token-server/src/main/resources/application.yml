@@ -1,4 +1,5 @@
 server:
+  # 项目服务配置
   port: ${token.server.port}
 
 spring:
@@ -8,7 +9,39 @@ spring:
     allow-circular-references: true
   datasource:
     druid:
+      # mysql配置
       driver-class-name: ${token.datasource.driver-class-name}
-      url: jdbc:msql://${token.datasource.host}:${token.datasource.port}/${token.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://${token.datasource.host}:${token.datasource.port}/${token.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${token.datasource.username}
       password: ${token.datasource.password}
+  redis:
+    # redis配置
+    host: ${token.redis.host}
+    port: ${token.redis.port}
+    database: ${token.redis.database}
+
+mybatis:
+  # mapper配置
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.token.entity
+  configuration:
+    # 开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  # logging配置
+  level:
+    com:
+      token:
+        mapper: debug
+        service: info
+        controller: info
+token:
+  jwt:
+    # admin端令牌配置
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: token-store
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: Authentication
