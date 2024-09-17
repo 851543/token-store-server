@@ -1,4 +1,5 @@
 package com.token.constant;
+
 /**
  * 密码填充相关常量
  */

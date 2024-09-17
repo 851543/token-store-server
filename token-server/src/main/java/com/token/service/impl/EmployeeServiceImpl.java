@@ -1,9 +1,6 @@
 package com.token.service.impl;
 
-import com.token.constant.JwtClaimsConstant;
-import com.token.constant.MessageConstant;
-import com.token.constant.PassWordConstant;
-import com.token.constant.StatusConstant;
+import com.token.constant.*;
 import com.token.dto.EmployeeLoginDTO;
 import com.token.entity.Employee;
 import com.token.exception.AccountIsDisableException;
@@ -16,11 +13,13 @@ import com.token.service.EmployeeService;
 import com.token.utils.JwtUtil;
 import com.token.vo.EmployeeLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -30,6 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private JwtProperties jwtProperties;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 员工登陆
@@ -62,6 +64,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 jwtProperties.getAdminTtl(),
                 claims
         );
+
+        // token令牌存入redis
+        redisTemplate.opsForValue().set(RedisKeyConstant.REDIS_ADMIN_TOKEN_KEY_ + employee.getId(), token, jwtProperties.getAdminTtl(), TimeUnit.SECONDS);
+
         return EmployeeLoginVO.builder()
                 .id(employee.getId())
                 .name(employee.getName())
@@ -72,11 +78,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 新增员工-用户名是唯一标识
+     *
      * @param employee
      */
     public void insert(Employee employee) {
         Employee ByEmployee = employeeMapper.getByUsername(employee.getUsername());
-        if (ByEmployee != null){
+        if (ByEmployee != null) {
             throw new UsernameIsExistException(MessageConstant.USERNAME_IS_EXIST);
         }
         employee.setPassword(DigestUtils.md5DigestAsHex(PassWordConstant.DEFAULT_PASSWORD.getBytes()));

@@ -55,7 +55,7 @@ public class AutoFillAspect {
 
         // 准备赋值的数据
         LocalDateTime now = LocalDateTime.now();
-        Long currentId = BaseContext.getCurrentId();
+        Integer currentId = BaseContext.getCurrentId().intValue();
 
         try {
             // 根据当前不同的操作类型，为对应的属性通过反射来赋值

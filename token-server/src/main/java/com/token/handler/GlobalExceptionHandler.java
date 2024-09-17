@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(BaseException.class)
-    public Result exceptionHandler(BaseException e) {
+    public Result baseExceptionHandler(BaseException e) {
         log.error("异常信息:{}", e.getMessage());
         return Result.error(e.getMessage());
     }
@@ -41,8 +41,20 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result handleException(MethodArgumentNotValidException e) {
+    public Result methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         log.error("异常信息:{}", e.getMessage());
         return Result.error(e.getBindingResult().getAllErrors().stream().findFirst().get().getDefaultMessage());
+    }
+
+    /**
+     * 其它异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public Result exceptionHandler(Exception e) {
+        log.error("异常信息:{}", e.getMessage());
+        return Result.error(e.getMessage());
     }
 }
