@@ -8,10 +8,18 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+/**
+ * redis配置类
+ */
 @Configuration
 @Slf4j
 public class RedisConfiguration {
 
+    /**
+     * 创建redis实例
+     * @param redisConnectionFactory
+     * @return
+     */
     @Bean
     @ConditionalOnSingleCandidate(RedisConnectionFactory.class)
     public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {

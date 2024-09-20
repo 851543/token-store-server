@@ -5,10 +5,12 @@ import com.token.exception.BaseException;
 import com.token.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BaseException.class)
     public Result baseExceptionHandler(BaseException e) {
         log.error("异常信息:{}", e.getMessage());
@@ -40,6 +43,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         log.error("异常信息:{}", e.getMessage());
@@ -52,6 +56,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public Result exceptionHandler(Exception e) {
         log.error("异常信息:{}", e.getMessage());
