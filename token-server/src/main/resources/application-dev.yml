@@ -1,0 +1,14 @@
+token:
+  server:
+    port: 8080
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: token_store_server
+    username: root
+    password: 1314520ok
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
