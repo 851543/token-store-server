@@ -90,4 +90,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.DISABLE);
         employeeMapper.insert(employee);
     }
+
+    /**
+     * 修改员工
+     *
+     * @param employee
+     */
+    public void update(Employee employee) {
+        employeeMapper.update(employee);
+    }
 }

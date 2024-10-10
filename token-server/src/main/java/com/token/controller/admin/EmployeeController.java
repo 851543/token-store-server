@@ -51,4 +51,17 @@ public class EmployeeController {
         employeeService.insert(employee);
         return Result.success();
     }
+
+    /**
+     * 修改员工
+     * @param employee
+     * @return
+     */
+    @ApiOperation(value = "修改员工")
+    @PostMapping("/update")
+    public Result update(@RequestBody Employee employee){
+        log.info("修改员工:{}", employee);
+        employeeService.update(employee);
+        return Result.success();
+    }
 }
