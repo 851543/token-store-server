@@ -6,6 +6,7 @@ import com.token.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface EmployeeMapper {
@@ -28,4 +29,10 @@ public interface EmployeeMapper {
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})")
     @AutoFill(OperationType.INSERT)
     void insert(Employee employee);
+
+    /**
+     * 修改员工数据
+     * @param employee
+     */
+    void update(Employee employee);
 }

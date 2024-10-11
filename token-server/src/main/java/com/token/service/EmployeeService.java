@@ -18,4 +18,10 @@ public interface EmployeeService {
      * @param employee
      */
     void insert(Employee employee);
+
+    /**
+     * 修改员工
+     * @param employee
+     */
+    void update(Employee employee);
 }
