@@ -30,4 +30,10 @@ public interface EmployeeService {
      * @param ids
      */
     void delete(Long[] ids);
+
+    /**
+     * 修改员工状态
+     * @param status
+     */
+    void status(Long id, Long status);
 }

@@ -102,9 +102,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 删除员工
+     *
      * @param ids
      */
     public void delete(Long[] ids) {
         employeeMapper.delete(ids);
+    }
+
+    /**
+     * 修改员工状态
+     *
+     * @param status
+     */
+    public void status(Long id, Long status) {
+        employeeMapper.update(Employee.builder().id(id).status(status.intValue()).build());
     }
 }

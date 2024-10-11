@@ -7,6 +7,7 @@ import com.token.result.Result;
 import com.token.service.EmployeeService;
 import com.token.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,33 +48,49 @@ public class EmployeeController {
     public Result<String> insert(@RequestBody @Validated(value = Employee.Group.class) Employee employee) {
         log.info("新增员工:{}", employee);
         employeeService.insert(employee);
-        return Result.success(MessageConstant.OPERATE_SUCCESS);
+        return Result.success();
     }
 
     /**
      * 修改员工
+     *
      * @param employee
      * @return
      */
     @ApiOperation(value = "修改员工")
     @PostMapping("/update")
-    public Result<String> update(@RequestBody Employee employee){
+    public Result<String> update(@RequestBody Employee employee) {
         log.info("修改员工:{}", employee);
         employeeService.update(employee);
-        return Result.success(MessageConstant.OPERATE_SUCCESS);
+        return Result.success();
     }
 
 
     /**
      * 删除员工-可批量删除
+     *
      * @param ids
      * @return
      */
     @ApiOperation(value = "删除员工")
     @DeleteMapping("/delete")
-    public Result<String> delete(Long[] ids){
+    public Result<String> delete(@RequestParam Long[] ids) {
         log.info("删除员工:{}", ids);
         employeeService.delete(ids);
-        return Result.success(MessageConstant.OPERATE_SUCCESS);
+        return Result.success();
+    }
+
+    /**
+     * 修改员工状态
+     *
+     * @param status
+     * @return
+     */
+    @ApiOperation(value = "修改员工状态")
+    @PostMapping("/status/{status}")
+    public Result<String> status(@PathVariable Long status, Long id) {
+        log.info("修改{}员工状态:{}", id, status);
+        employeeService.status(id, status);
+        return Result.success();
     }
 }
