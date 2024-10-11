@@ -22,4 +22,5 @@ public interface MessageConstant {
     String PHONE_REGULAR = "手机号只能为11位";
     String SEX_FORMAT_ERROR = "性别格式错误";
     String USERNAME_IS_EXIST = "用户名已存在";
+    String OPERATE_SUCCESS = "操作成功";
 }

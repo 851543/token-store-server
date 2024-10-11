@@ -99,4 +99,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(Employee employee) {
         employeeMapper.update(employee);
     }
+
+    /**
+     * 删除员工
+     * @param ids
+     */
+    public void delete(Long[] ids) {
+        employeeMapper.delete(ids);
+    }
 }

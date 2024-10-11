@@ -24,4 +24,10 @@ public interface EmployeeService {
      * @param employee
      */
     void update(Employee employee);
+
+    /**
+     * 删除员工
+     * @param ids
+     */
+    void delete(Long[] ids);
 }

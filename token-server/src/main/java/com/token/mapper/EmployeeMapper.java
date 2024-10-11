@@ -35,4 +35,10 @@ public interface EmployeeMapper {
      * @param employee
      */
     void update(Employee employee);
+
+    /**
+     * 删除员工数据
+     * @param ids
+     */
+    void delete(Long[] ids);
 }

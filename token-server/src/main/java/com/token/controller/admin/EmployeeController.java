@@ -1,5 +1,6 @@
 package com.token.controller.admin;
 
+import com.token.constant.MessageConstant;
 import com.token.dto.EmployeeLoginDTO;
 import com.token.entity.Employee;
 import com.token.result.Result;
@@ -10,10 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/employee")
@@ -46,10 +44,10 @@ public class EmployeeController {
      */
     @ApiOperation(value = "新增员工")
     @PostMapping("/insert")
-    public Result insert(@RequestBody @Validated(value = Employee.Group.class) Employee employee) {
+    public Result<String> insert(@RequestBody @Validated(value = Employee.Group.class) Employee employee) {
         log.info("新增员工:{}", employee);
         employeeService.insert(employee);
-        return Result.success();
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
     /**
@@ -59,9 +57,23 @@ public class EmployeeController {
      */
     @ApiOperation(value = "修改员工")
     @PostMapping("/update")
-    public Result update(@RequestBody Employee employee){
+    public Result<String> update(@RequestBody Employee employee){
         log.info("修改员工:{}", employee);
         employeeService.update(employee);
-        return Result.success();
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
+
+
+    /**
+     * 删除员工-可批量删除
+     * @param ids
+     * @return
+     */
+    @ApiOperation(value = "删除员工")
+    @DeleteMapping("/delete")
+    public Result<String> delete(Long[] ids){
+        log.info("删除员工:{}", ids);
+        employeeService.delete(ids);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 }
