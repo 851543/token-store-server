@@ -34,5 +34,6 @@ public interface EmployeeMapper {
      * 修改员工数据
      * @param employee
      */
+    @AutoFill(OperationType.UPDATE)
     void update(Employee employee);
 }
