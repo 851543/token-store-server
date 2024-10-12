@@ -26,9 +26,9 @@ public class Result<T> implements Serializable {
     private Integer code;
 
     /**
-     * 错误信息
+     * 响应信息
      */
-    @ApiModelProperty(value = "错误信息")
+    @ApiModelProperty(value = "响应信息")
     private String msg;
 
     /**
@@ -46,6 +46,19 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> success() {
         Result<T> result = new Result<T>();
         result.code = 1;
+        return result;
+    }
+
+    /**
+     * 成功响应 携带信息
+     * @param msg
+     * @param <T>
+     * @return
+     */
+    public static <T> Result<T> success(String msg) {
+        Result<T> result = new Result<T>();
+        result.code = 1;
+        result.msg = msg;
         return result;
     }
 

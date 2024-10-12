@@ -48,7 +48,7 @@ public class EmployeeController {
     public Result<String> insert(@RequestBody @Validated(value = Employee.Group.class) Employee employee) {
         log.info("新增员工:{}", employee);
         employeeService.insert(employee);
-        return Result.success();
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
     /**
@@ -62,7 +62,7 @@ public class EmployeeController {
     public Result<String> update(@RequestBody Employee employee) {
         log.info("修改员工:{}", employee);
         employeeService.update(employee);
-        return Result.success();
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
 
@@ -77,7 +77,7 @@ public class EmployeeController {
     public Result<String> delete(@RequestParam Long[] ids) {
         log.info("删除员工:{}", ids);
         employeeService.delete(ids);
-        return Result.success();
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
     /**
@@ -91,6 +91,6 @@ public class EmployeeController {
     public Result<String> status(@PathVariable Long status, Long id) {
         log.info("修改{}员工状态:{}", id, status);
         employeeService.status(id, status);
-        return Result.success();
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 }

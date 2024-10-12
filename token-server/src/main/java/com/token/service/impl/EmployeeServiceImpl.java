@@ -97,6 +97,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employee
      */
     public void update(Employee employee) {
+        employee.setPassword(DigestUtils.md5DigestAsHex(employee.getPassword().getBytes()));
         employeeMapper.update(employee);
     }
 
