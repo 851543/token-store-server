@@ -90,4 +90,32 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.DISABLE);
         employeeMapper.insert(employee);
     }
+
+    /**
+     * 修改员工
+     *
+     * @param employee
+     */
+    public void update(Employee employee) {
+        employee.setPassword(DigestUtils.md5DigestAsHex(employee.getPassword().getBytes()));
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 删除员工
+     *
+     * @param ids
+     */
+    public void delete(Long[] ids) {
+        employeeMapper.delete(ids);
+    }
+
+    /**
+     * 修改员工状态
+     *
+     * @param status
+     */
+    public void status(Long id, Long status) {
+        employeeMapper.update(Employee.builder().id(id).status(status.intValue()).build());
+    }
 }
