@@ -2,7 +2,9 @@ package com.token.controller.admin;
 
 import com.token.constant.MessageConstant;
 import com.token.dto.EmployeeLoginDTO;
+import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
+import com.token.result.PageResult;
 import com.token.result.Result;
 import com.token.service.EmployeeService;
 import com.token.vo.EmployeeLoginVO;
@@ -82,8 +84,8 @@ public class EmployeeController {
 
     /**
      * 修改员工状态
-     *
      * @param status
+     * @param id
      * @return
      */
     @ApiOperation(value = "修改员工状态")
@@ -92,5 +94,18 @@ public class EmployeeController {
         log.info("修改{}员工状态:{}", id, status);
         employeeService.status(id, status);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @ApiOperation(value = "员工分页查询")
+    @GetMapping("/page")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+        log.info("员工分页查询:{}", employeePageQueryDTO);
+        PageResult pageList = employeeService.page(employeePageQueryDTO);
+        return Result.success(pageList);
     }
 }

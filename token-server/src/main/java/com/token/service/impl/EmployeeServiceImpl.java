@@ -1,7 +1,11 @@
 package com.token.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.token.constant.*;
 import com.token.dto.EmployeeLoginDTO;
+import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
 import com.token.exception.AccountIsDisableException;
 import com.token.exception.AccountNotExistException;
@@ -9,6 +13,7 @@ import com.token.exception.PasswordErrorException;
 import com.token.exception.UsernameIsExistException;
 import com.token.mapper.EmployeeMapper;
 import com.token.properties.JwtProperties;
+import com.token.result.PageResult;
 import com.token.service.EmployeeService;
 import com.token.utils.JwtUtil;
 import com.token.vo.EmployeeLoginVO;
@@ -18,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -112,10 +118,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 修改员工状态
-     *
+     * @param id
      * @param status
      */
     public void status(Long id, Long status) {
         employeeMapper.update(Employee.builder().id(id).status(status.intValue()).build());
+    }
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    public PageResult page(EmployeePageQueryDTO employeePageQueryDTO) {
+        // 开启PageHelper插件
+        PageHelper.startPage(employeePageQueryDTO.getPageNow(),employeePageQueryDTO.getPageSize());
+
+        // 查询数据集合
+        Page<Employee> page = (Page<Employee>) employeeMapper.queryList(employeePageQueryDTO);
+
+        return PageResult.builder()
+                .total(page.getTotal())
+                .records(page.getResult())
+                .build();
     }
 }

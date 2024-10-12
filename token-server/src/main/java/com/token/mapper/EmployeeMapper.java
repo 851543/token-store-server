@@ -1,12 +1,15 @@
 package com.token.mapper;
 
 import com.token.annotation.AutoFill;
+import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
 import com.token.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 @Mapper
 public interface EmployeeMapper {
@@ -42,4 +45,11 @@ public interface EmployeeMapper {
      * @param ids
      */
     void delete(Long[] ids);
+
+    /**
+     * 查询员工数据集合
+     * @param employeePageQueryDTO
+     * @return
+     */
+    List<Employee> queryList(EmployeePageQueryDTO employeePageQueryDTO);
 }

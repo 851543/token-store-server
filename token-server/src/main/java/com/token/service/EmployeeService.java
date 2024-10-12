@@ -1,7 +1,9 @@
 package com.token.service;
 
 import com.token.dto.EmployeeLoginDTO;
+import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
+import com.token.result.PageResult;
 import com.token.vo.EmployeeLoginVO;
 
 public interface EmployeeService {
@@ -33,7 +35,15 @@ public interface EmployeeService {
 
     /**
      * 修改员工状态
+     * @param id
      * @param status
      */
     void status(Long id, Long status);
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    PageResult page(EmployeePageQueryDTO employeePageQueryDTO);
 }
