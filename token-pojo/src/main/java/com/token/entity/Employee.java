@@ -1,5 +1,6 @@
 package com.token.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.token.annotation.Sex;
 import com.token.constant.MessageConstant;
 import com.token.dto.EmployeeLoginDTO;
@@ -57,6 +58,7 @@ public class Employee implements Serializable {
 
     @TableField(value = "password")
     @ApiModelProperty(value = "密码")
+    @JsonIgnore
     private String password;
 
     @TableField(value = "phone")

@@ -38,6 +38,13 @@ public interface EmployeeService {
     void status(Long id, Long status);
 
     /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    PageResult page(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
      * 查询员工信息
      * @param id
      */

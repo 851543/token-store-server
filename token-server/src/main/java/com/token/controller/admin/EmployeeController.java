@@ -66,7 +66,7 @@ public class EmployeeController {
     }
 
 
-    /**020725
+    /**
      * 删除员工-可批量删除
      *
      * @param ids
@@ -105,5 +105,18 @@ public class EmployeeController {
         log.info("{}员工查询信息",id);
         employeeService.getEmployeeInfo(id);
         return null;
+    }
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @ApiOperation(value = "员工分页查询")
+    @GetMapping("/page")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+        log.info("员工分页查询:{}", employeePageQueryDTO);
+        PageResult pageList = employeeService.page(employeePageQueryDTO);
+        return Result.success(pageList);
     }
 }

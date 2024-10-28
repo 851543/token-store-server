@@ -120,6 +120,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    public PageResult page(EmployeePageQueryDTO employeePageQueryDTO) {
+        // 开启PageHelper插件
+        PageHelper.startPage(employeePageQueryDTO.getPageNow(),employeePageQueryDTO.getPageSize());
+
+        // 查询数据集合
+        Page<Employee> page = (Page<Employee>) employeeMapper.queryList(employeePageQueryDTO);
+
+        return PageResult.builder()
+                .total(page.getTotal())
+                .records(page.getResult())
+                .build();
+    }
+
+    /**
      * 查询员工信息
      *
      * @param id

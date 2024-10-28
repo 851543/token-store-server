@@ -3,6 +3,7 @@ package com.token.result;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * 分页查询结果
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "PageResult", description = "分页查询结果")

@@ -44,6 +44,13 @@ public interface EmployeeMapper {
     void delete(Long[] ids);
 
     /**
+     * 查询员工数据集合
+     * @param employeePageQueryDTO
+     * @return
+     */
+    List<Employee> queryList(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
      * 查询员工数据
      *
      * @param id
