@@ -1,7 +1,9 @@
 package com.token.service;
 
 import com.token.dto.EmployeeLoginDTO;
+import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
+import com.token.result.PageResult;
 import com.token.vo.EmployeeLoginVO;
 
 public interface EmployeeService {
