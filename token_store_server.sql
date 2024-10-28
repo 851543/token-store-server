@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 13/09/2024 21:59:07
+ Date: 28/10/2024 21:06:44
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +37,11 @@ CREATE TABLE `address_book`  (
   `label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '标签',
   `is_default` tinyint(1) NOT NULL DEFAULT 0 COMMENT '默认 0 否 1是',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '地址簿' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '地址簿' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of address_book
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for category
@@ -55,7 +59,11 @@ CREATE TABLE `category`  (
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_category_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品及套餐分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品及套餐分类' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of category
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for employee
@@ -76,7 +84,14 @@ CREATE TABLE `employee`  (
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '员工信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '员工信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of employee
+-- ----------------------------
+INSERT INTO `employee` VALUES (6, '超级用户', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '13123556625', '男', '', 1, '2024-09-16 23:02:15', '2024-09-16 23:02:15', NULL, NULL);
+INSERT INTO `employee` VALUES (9, '猪bb', 'abcv', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', 0, '2024-09-17 18:01:32', '2024-10-12 16:32:23', 0, 6);
+INSERT INTO `employee` VALUES (14, 'pwc', 'qqq', 'e10adc3949ba59abbe56e057f20f883e', '13123556625', '男', '', 0, '2024-10-12 20:49:30', '2024-10-12 20:49:30', 6, 6);
 
 -- ----------------------------
 -- Table structure for goods
@@ -96,7 +111,11 @@ CREATE TABLE `goods`  (
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_dish_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of goods
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for goods_specs
@@ -108,7 +127,11 @@ CREATE TABLE `goods_specs`  (
   `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '规格名称',
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '规格数据list',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品规格关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品规格关系表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of goods_specs
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for order_detail
@@ -125,7 +148,11 @@ CREATE TABLE `order_detail`  (
   `number` int NOT NULL DEFAULT 1 COMMENT '数量',
   `amount` decimal(10, 2) NOT NULL COMMENT '金额',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '订单明细表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '订单明细表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_detail
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for orders
@@ -158,7 +185,11 @@ CREATE TABLE `orders`  (
   `tableware_number` int NULL DEFAULT NULL COMMENT '餐具数量',
   `tableware_status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '餐具数量状态  1按餐量提供  0选择具体数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '订单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '订单表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for setmeal
@@ -178,7 +209,11 @@ CREATE TABLE `setmeal`  (
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_setmeal_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of setmeal
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for setmeal_goods
@@ -192,7 +227,11 @@ CREATE TABLE `setmeal_goods`  (
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品单价（冗余字段）',
   `copies` int NULL DEFAULT NULL COMMENT '商品份数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐商品关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐商品关系' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of setmeal_goods
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for shopping_cart
@@ -210,7 +249,11 @@ CREATE TABLE `shopping_cart`  (
   `amount` decimal(10, 2) NOT NULL COMMENT '金额',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '购物车' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '购物车' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of shopping_cart
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
@@ -226,6 +269,10 @@ CREATE TABLE `user`  (
   `avatar` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '头像',
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
