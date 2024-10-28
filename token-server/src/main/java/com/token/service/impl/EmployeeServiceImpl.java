@@ -118,4 +118,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void status(Long id, Long status) {
         employeeMapper.update(Employee.builder().id(id).status(status.intValue()).build());
     }
+
+    /**
+     * 查询员工信息
+     *
+     * @param id
+     */
+    public void getEmployeeInfo(Long id) {
+        employeeMapper.getEmployeeById(id);
+    }
 }

@@ -42,4 +42,12 @@ public interface EmployeeMapper {
      * @param ids
      */
     void delete(Long[] ids);
+
+    /**
+     * 查询员工数据
+     *
+     * @param id
+     */
+    @Select("select * from employee where id = #{id}")
+    void getEmployeeById(Long id);
 }

@@ -66,7 +66,7 @@ public class EmployeeController {
     }
 
 
-    /**
+    /**020725
      * 删除员工-可批量删除
      *
      * @param ids
@@ -92,5 +92,18 @@ public class EmployeeController {
         log.info("修改{}员工状态:{}", id, status);
         employeeService.status(id, status);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
+
+    /**
+     * 查询员工信息
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "查询员工信息")
+    @GetMapping("/personal/{id}")
+    public  Result<Employee> personal(@PathVariable Long id) {
+        log.info("{}员工查询信息",id);
+        employeeService.getEmployeeInfo(id);
+        return null;
     }
 }

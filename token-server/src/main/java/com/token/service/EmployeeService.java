@@ -36,4 +36,10 @@ public interface EmployeeService {
      * @param status
      */
     void status(Long id, Long status);
+
+    /**
+     * 查询员工信息
+     * @param id
+     */
+    void getEmployeeInfo(Long id);
 }
