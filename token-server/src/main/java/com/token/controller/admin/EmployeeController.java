@@ -118,8 +118,8 @@ public class EmployeeController {
     @GetMapping("/personal/{id}")
     public  Result<Employee> personal(@PathVariable Long id) {
         log.info("{}员工查询信息",id);
-        employeeService.getEmployeeInfo(id);
-        return null;
+        return Result.success(employeeService.getEmployeeInfo(id));
+
     }
 
 

@@ -7,7 +7,7 @@ token:
     port: 3306
     database: token_store_server
     username: root
-    password: 1314520ok
+    password: root
   redis:
     host: 127.0.0.1
     port: 6379

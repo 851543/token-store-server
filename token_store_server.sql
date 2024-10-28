@@ -20,6 +20,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for address_book
 -- ----------------------------
+CREATE DATABASE token_store_server;
+USE token_store_server;
 DROP TABLE IF EXISTS `address_book`;
 CREATE TABLE `address_book`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',

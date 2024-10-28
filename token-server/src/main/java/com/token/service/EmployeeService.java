@@ -50,5 +50,5 @@ public interface EmployeeService {
      * 查询员工信息
      * @param id
      */
-    void getEmployeeInfo(Long id);
+    Employee getEmployeeInfo(Long id);
 }

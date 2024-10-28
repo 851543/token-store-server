@@ -59,5 +59,5 @@ public interface EmployeeMapper {
      * @param id
      */
     @Select("select * from employee where id = #{id}")
-    void getEmployeeById(Long id);
+    Employee getEmployeeById(Long id);
 }

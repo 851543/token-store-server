@@ -146,7 +146,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      *
      * @param id
      */
-    public void getEmployeeInfo(Long id) {
-        employeeMapper.getEmployeeById(id);
+    public Employee getEmployeeInfo(Long id) {
+        return employeeMapper.getEmployeeById(id);
     }
 }
