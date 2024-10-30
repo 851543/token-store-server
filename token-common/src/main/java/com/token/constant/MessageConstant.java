@@ -23,4 +23,5 @@ public interface MessageConstant {
     String SEX_FORMAT_ERROR = "性别格式错误";
     String USERNAME_IS_EXIST = "用户名已存在";
     String OPERATE_SUCCESS = "操作成功";
+    String UPLOAD_FAILED = "上传失败";
 }

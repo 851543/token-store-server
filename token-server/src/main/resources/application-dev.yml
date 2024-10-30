@@ -12,3 +12,11 @@ token:
     host: 127.0.0.1
     port: 6379
     database: 0
+  alioss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    access-key-id: LTAI5tD3WpHFUp5NwgDVefca
+    access-key-secret: vbyXI6iorMlZLhnOHsmMkopVR5ijDv
+    bucket-name: java-py
+  local:
+    file:
+      path: "D:\\token\\file"
