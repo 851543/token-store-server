@@ -24,5 +24,6 @@ public class GoodsController {
     @ApiOperation(value = "新增商品")
     public Result<String> insert(){
         return Result.success(MessageConstant.OPERATE_SUCCESS);
+
     }
 }

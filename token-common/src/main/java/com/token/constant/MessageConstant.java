@@ -24,4 +24,6 @@ public interface MessageConstant {
     String USERNAME_IS_EXIST = "用户名已存在";
     String OPERATE_SUCCESS = "操作成功";
     String UPLOAD_FAILED = "上传失败";
+    String CATEGORY_TYPE_ERROR = "分类类型错误";
+    String CATEGORY_NAME_NOT_EMPTY = "分类名称不能为空";
 }
