@@ -57,4 +57,6 @@ public class GoodsDTO {
     @TableField(value="update_user")
     @ApiModelProperty(value="修改人")
     private Integer updateUser;
+
+
 }

@@ -98,6 +98,7 @@ public class EmployeeController {
 
     /**
      * 员工分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
@@ -111,6 +112,7 @@ public class EmployeeController {
 
     /**
      * 查询员工信息
+     *
      * @param id
      * @return
      */
@@ -121,6 +123,5 @@ public class EmployeeController {
         return Result.success(employeeService.getEmployeeInfo(id));
 
     }
-
 
 }
