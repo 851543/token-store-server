@@ -51,6 +51,7 @@ token:
     access-key-id: ${token.alioss.access-key-id}
     access-key-secret: ${token.alioss.access-key-secret}
     bucket-name: ${token.alioss.bucket-name}
+  # 本地存储
   local:
     file:
       path: ${token.local.file.path}

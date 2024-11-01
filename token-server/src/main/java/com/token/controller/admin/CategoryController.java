@@ -2,6 +2,9 @@ package com.token.controller.admin;
 
 import com.token.constant.MessageConstant;
 import com.token.dto.CategoryDTO;
+import com.token.dto.CategoryPageQueryDTO;
+import com.token.entity.Category;
+import com.token.result.PageResult;
 import com.token.result.Result;
 import com.token.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -33,7 +36,7 @@ public class CategoryController {
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
-
+    // TODO Mapper修改需要完善
     /**
      * 根据id删除分类
      * @param id
@@ -59,4 +62,28 @@ public class CategoryController {
         categoryService.update(categoryDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
+
+    /**
+     * 根据id查询分类信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "查询分类信息")
+   public Result<Category> personalInfo(@PathVariable Long id){
+        log.info("查询分类信息{}",id);
+        return Result.success(categoryService.getCategoryInfo(id));
+   }
+
+    /**
+     * 分类分页查询
+     * @param categoryPageQueryDTO
+     * @return
+     */
+   @GetMapping("/page")
+   @ApiOperation(value = "分类分页查询")
+   public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
+        log.info("分类分页查询:{}",categoryPageQueryDTO);
+        return Result.success(categoryService.page(categoryPageQueryDTO));
+   }
 }

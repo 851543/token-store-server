@@ -118,7 +118,7 @@ public class EmployeeController {
      */
     @ApiOperation(value = "查询员工信息")
     @GetMapping("/personal/{id}")
-    public  Result<Employee> personal(@PathVariable Long id) {
+    public  Result<Employee> personalInfo(@PathVariable Long id) {
         log.info("{}员工查询信息",id);
         return Result.success(employeeService.getEmployeeInfo(id));
 
