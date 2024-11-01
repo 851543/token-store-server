@@ -8,7 +8,6 @@ import com.token.result.PageResult;
 import com.token.result.Result;
 import com.token.service.CategoryService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +84,19 @@ public class CategoryController {
    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
         log.info("分类分页查询:{}",categoryPageQueryDTO);
         return Result.success(categoryService.page(categoryPageQueryDTO));
+   }
+
+    /**
+     * 修改分类状态
+     * @param status
+     * @param id
+     * @return
+     */
+   @ApiOperation(value = "修改分类状态")
+   @PostMapping("/status/{status}")
+   public Result<String> status(@PathVariable Long status, Long id){
+       log.info("修改{}分类状态:{}",id ,status);
+       categoryService.status(id, status);
+       return Result.success(MessageConstant.OPERATE_SUCCESS);
    }
 }

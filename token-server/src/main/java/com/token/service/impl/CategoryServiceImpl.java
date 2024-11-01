@@ -87,4 +87,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.getCategoryByName(name);
     }
 
+    /**
+     * 修改分类状态
+     * @param id
+     * @param status
+     */
+    public void status(Long id, Long status) {
+        categoryMapper.status(id, status);
+    }
 }
