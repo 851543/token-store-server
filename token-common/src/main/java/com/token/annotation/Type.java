@@ -6,6 +6,9 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+/**
+ * 自定义注解，用于类型校验
+ */
 @Documented
 @Constraint(
         validatedBy = {TypeValidation.class}

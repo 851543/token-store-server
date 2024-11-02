@@ -1,22 +1,18 @@
 package com.token.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.token.entity.GoodsSpecs;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
-@ApiModel(description = "商品")
+@ApiModel(description = "新增商品的数据模型")
 public class GoodsDTO {
 
     private static final long serialVersionUID = 1L;
-
-    @TableId(value="id")
-    @ApiModelProperty(value="主键")
-    private Long id;
 
     @TableField(value="name")
     @ApiModelProperty(value="商品名称")
@@ -38,25 +34,6 @@ public class GoodsDTO {
     @ApiModelProperty(value="描述信息")
     private String description;
 
-    @TableField(value="status")
-    @ApiModelProperty(value="0 停售 1 起售")
-    private Integer status;
-
-    @TableField(value="create_time")
-    @ApiModelProperty(value="创建时间")
-    private LocalDateTime createTime;
-
-    @TableField(value="update_time")
-    @ApiModelProperty(value="更新时间")
-    private LocalDateTime updateTime;
-
-    @TableField(value="create_user")
-    @ApiModelProperty(value="创建人")
-    private Integer createUser;
-
-    @TableField(value="update_user")
-    @ApiModelProperty(value="修改人")
-    private Integer updateUser;
-
-
+    @ApiModelProperty(value = "商品规模列表")
+    private List<GoodsSpecs> goodsSpecsList;
 }

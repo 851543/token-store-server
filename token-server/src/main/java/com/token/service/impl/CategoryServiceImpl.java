@@ -39,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param id
      */
     public void delete(Integer id) {
+        //  TODO 启用的分类不能直接删除,需要先禁用
         categoryMapper.delete(id);
     }
 
