@@ -93,7 +93,6 @@ public class CategoryServiceImpl implements CategoryService {
      * @param status
      */
     public void status(Long id, Long status) {
-        Category category = Category.builder().id(id).status(status.intValue()).build();
-        categoryMapper.status(category);
+        categoryMapper.status(id, status);
     }
 }
