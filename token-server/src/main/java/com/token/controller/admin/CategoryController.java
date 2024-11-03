@@ -1,8 +1,10 @@
 package com.token.controller.admin;
 
+import com.token.annotation.Id;
 import com.token.constant.MessageConstant;
 import com.token.dto.CategoryDTO;
 import com.token.dto.CategoryPageQueryDTO;
+import com.token.dto.GoodsDTO;
 import com.token.entity.Category;
 import com.token.result.PageResult;
 import com.token.result.Result;
@@ -14,10 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @RestController
 @RequestMapping("/admin/category")
 @Api(tags = "分类")
 @Slf4j
+@Validated
 public class CategoryController {
 
     @Autowired
@@ -89,14 +96,14 @@ public class CategoryController {
     /**
      * 修改分类状态
      * @param status
-     * @param id
+     * @param Id
      * @return
      */
    @ApiOperation(value = "修改分类状态")
    @PostMapping("/status/{status}")
-   public Result<String> status(@PathVariable Long status, Long id){
-       log.info("修改{}分类状态:{}",id ,status);
-       categoryService.status(id, status);
+   public Result<String> status(@PathVariable Long status,@RequestParam @Id(message = "id为空") Long Id){
+       log.info("修改{}分类状态:{}",Id ,status);
+       categoryService.status(Id, status);
        return Result.success(MessageConstant.OPERATE_SUCCESS);
    }
 }

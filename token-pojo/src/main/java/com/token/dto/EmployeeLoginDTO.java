@@ -4,7 +4,6 @@ import com.token.constant.MessageConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;

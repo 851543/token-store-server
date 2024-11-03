@@ -6,10 +6,7 @@ import com.token.constant.MessageConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
-
 @Data
 @ApiModel(description = "新增分类的数据模型")
 public class CategoryDTO {
