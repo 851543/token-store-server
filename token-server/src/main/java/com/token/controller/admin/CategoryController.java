@@ -35,17 +35,16 @@ public class CategoryController {
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
-    // TODO Mapper修改需要完善
     /**
      * 根据id删除分类
-     * @param id
+     * @param ids
      * @return
      */
     @DeleteMapping
     @ApiOperation(value = "删除分类")
-    public Result<String> delete(Integer id) {
-        log.info("删除了分类{}",id);
-        categoryService.delete(id);
+    public Result<String> delete(Long[] ids) {
+        log.info("删除了分类{}",ids);
+        categoryService.delete(ids);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 

@@ -1,6 +1,5 @@
 package com.token.mapper;
 
-import com.github.pagehelper.Page;
 import com.token.annotation.AutoFill;
 import com.token.dto.CategoryPageQueryDTO;
 import com.token.entity.Category;
@@ -25,18 +24,15 @@ public interface CategoryMapper {
     /**
      * 根据id删除分类
      *
-     * @param id
+     * @param ids
      */
-    @Delete("delete from category where id = #{id}")
-    void delete(Integer id);
+    void delete(Long[] ids);
 
-    //  TODO 这里也需要修改 使用Mapper可以达到复用
     /**
      * 修改分类信息
      *
      * @param category
      */
-    @Update("update category set type=#{type},name=#{name},status=#{status},update_time=#{updateTime},update_user=#{updateUser} where id = #{id}")
     @AutoFill(OperationType.UPDATE)
     void update(Category category);
 

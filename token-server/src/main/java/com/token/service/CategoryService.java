@@ -17,9 +17,9 @@ public interface CategoryService {
     /**
      * 根据id删除分类
      *
-     * @param id
+     * @param ids
      */
-    void delete(Integer id);
+    void delete(Long[] ids);
 
 
     /**
@@ -49,4 +49,6 @@ public interface CategoryService {
      * @param status
      */
     void status(Long id, Long status);
+
+    Category findCategoryByName(String name);
 }
