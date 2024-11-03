@@ -26,4 +26,9 @@ public interface MessageConstant {
     String UPLOAD_FAILED = "上传失败";
     String CATEGORY_TYPE_ERROR = "分类类型错误";
     String CATEGORY_NAME_NOT_EMPTY = "分类名称不能为空";
+    String CATEGORY_NOT_EXIST = "该分类不存在";
+    String CATEGORY_EXIST = "该分类已存在";
+    String GOODS_NAME_NOT_EMPTY = "商品名称不能为空";
+    String CATEGORY_ID_NOT_EMPTY = "分类id不能为空";
+    String GOODS_NAME_IS_EXIST = "商品名称已存在";
 }

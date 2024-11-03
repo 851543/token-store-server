@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.token.mapper.GoodsMapper">
+    <update id="update">
+        update goods
+        <set>
+            <if test="goods.name != null and goods.name !=''">
+                name = #{goods.name},
+            </if>
+            <if test="goods.categoryId != null">
+                category_id = #{goods.categoryId},
+            </if>
+            <if test="goods.price != null">
+                price = #{goods.price},
+            </if>
+            <if test="goods.image != null and goods.image != ''">
+                image = #{goods.image},
+            </if>
+            <if test="goods.description != null and goods.description != ''">
+                description = #{goods.description},
+            </if>
+            <if test="goods.status != null">
+                status = #{goods.status},
+            </if>
+            <if test="goods.createTime != null">
+                create_time = #{goods.createTime},
+            </if>
+            <if test="goods.updateTime != null">
+                update_time = #{goods.updateTime},
+            </if>
+            <if test="goods.createUser != null">
+                create_user = #{goods.createUser},
+            </if>
+            <if test="goods.updateUser != null">
+                update_user = #{goods.updateUser},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

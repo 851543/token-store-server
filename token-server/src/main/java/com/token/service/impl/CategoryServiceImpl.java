@@ -2,12 +2,15 @@ package com.token.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.token.constant.MessageConstant;
 import com.token.constant.StatusConstant;
 import com.token.dto.CategoryDTO;
 import com.token.dto.CategoryPageQueryDTO;
 import com.token.entity.Category;
+import com.token.exception.CategoryIsExistException;
 import com.token.mapper.CategoryMapper;
 import com.token.result.PageResult;
+import com.token.result.Result;
 import com.token.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +28,25 @@ public class CategoryServiceImpl implements CategoryService {
      * @return
      */
     public void insert(CategoryDTO categoryDTO) {
-        //  TODO 分类名称唯一 新增前先查询是否存在该名称
         Category category = Category.builder().build();
         //  拷贝属性
         BeanUtils.copyProperties(categoryDTO, category);
         category.setStatus(StatusConstant.DISABLE);
-        categoryMapper.insert(category);
+        Category categoryByName = categoryMapper.getCategoryByName(category.getName());
+        if(categoryByName == null){
+            categoryMapper.insert(category);
+        }else {
+            throw new CategoryIsExistException(MessageConstant.CATEGORY_EXIST);
+        }
     }
 
     /**
      * 根据id删除分类
      *
-     * @param id
+     * @param ids
      */
-    public void delete(Integer id) {
-        categoryMapper.delete(id);
+    public void delete(Long[] ids) {
+        categoryMapper.delete(ids);
     }
 
     /**
@@ -48,11 +55,15 @@ public class CategoryServiceImpl implements CategoryService {
      * @param categoryDTO
      */
     public void update(CategoryDTO categoryDTO) {
-        //  TODO 分类名称唯一 修改前先查询是否存在该名称
         Category category = Category.builder().build();
         //  拷贝属性
         BeanUtils.copyProperties(categoryDTO, category);
-        categoryMapper.update(category);
+        Category categoryByName = categoryMapper.getCategoryByName(category.getName());
+        if(categoryByName != null){
+            categoryMapper.update(category);
+        }else {
+            throw new CategoryIsExistException(MessageConstant.CATEGORY_NOT_EXIST);
+        }
     }
 
     /**
