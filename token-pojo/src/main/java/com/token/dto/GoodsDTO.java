@@ -34,6 +34,10 @@ public class GoodsDTO {
     @ApiModelProperty(value="描述信息")
     private String description;
 
+    @TableField(value="status")
+    @ApiModelProperty(value="0 停售 1 起售")
+    private Integer status;
+
     @ApiModelProperty(value = "商品规模列表")
     private List<GoodsSpecs> goodsSpecsList;
 }

@@ -2,6 +2,7 @@ package com.token.mapper;
 
 import com.token.annotation.AutoFill;
 import com.token.dto.CategoryPageQueryDTO;
+import com.token.dto.GoodsDTO;
 import com.token.entity.Category;
 import com.token.entity.Goods;
 import com.token.enumeration.OperationType;
@@ -29,4 +30,12 @@ public interface GoodsMapper {
     @AutoFill(OperationType.INSERT)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Goods goods);
+
+    /**
+     * 根据id修改商品数据
+     * @param id
+     * @param goods
+     */
+    @AutoFill(OperationType.UPDATE)
+    void update(@Param("goods") Goods goods,@Param("id") Long id);
 }

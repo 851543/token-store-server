@@ -31,25 +31,26 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 新增商品
+     *
      * @param goodsDTO
      * @return
      */
     @Transactional  //  开启事务
     public void insert(GoodsDTO goodsDTO) {
         //  参数合法校验
-        if (StringUtils.isEmpty(goodsDTO.getName())){
+        if (StringUtils.isEmpty(goodsDTO.getName())) {
             throw new GoodsNameNotEmptyException(MessageConstant.GOODS_NAME_NOT_EMPTY);
         }
-        if (goodsDTO.getCategoryId() == null){
+        if (goodsDTO.getCategoryId() == null) {
             throw new CategoryIdNotEmptyException(MessageConstant.CATEGORY_ID_NOT_EMPTY);
         }
         //  商品名称唯一性
-        if (findGoodsByName(goodsDTO.getName()) != null){
+        if (findGoodsByName(goodsDTO.getName()) != null) {
             throw new GoodsNameIsExistException(MessageConstant.GOODS_NAME_IS_EXIST);
         }
 
         Goods goods = new Goods();
-        BeanUtils.copyProperties(goodsDTO,goods);
+        BeanUtils.copyProperties(goodsDTO, goods);
 
         //  默认数值
         goods.setPrice(DefaultPriceConstant.GoodsPrice);
@@ -59,21 +60,70 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.insert(goods);
 
         //  新增一批规模数据
-        List<GoodsSpecs> goodsSpecsList = goodsDTO.getGoodsSpecsList();
-        if (goodsSpecsList != null && goodsSpecsList.size() > 0){
-            goodsSpecsList.forEach((item)->{
-                item.setGoodsId(goods.getId().intValue());
+        insertBatch(goods.getId(), goodsDTO.getGoodsSpecsList());
+    }
+
+    /**
+     * 修改商品
+     *
+     * @param id
+     * @param goodsDTO
+     * @return
+     */
+    @Transactional
+    public void update(Long id, GoodsDTO goodsDTO) {
+        //  商品名称唯一性
+        if (findGoodsByName(goodsDTO.getName()) != null) {
+            throw new GoodsNameIsExistException(MessageConstant.GOODS_NAME_IS_EXIST);
+        }
+
+        Goods goods = new Goods();
+        BeanUtils.copyProperties(goodsDTO, goods);
+
+        goodsMapper.update(goods, id);
+        //  覆盖的方式处理商品规模
+        deleteBatchByGoodsId(id, goodsDTO.getGoodsSpecsList());
+        //  新增一批规模数据
+        insertBatch(id, goodsDTO.getGoodsSpecsList());
+    }
+
+    /**
+     * 根据商品名称查询商品
+     *
+     * @param name
+     * @return
+     */
+    public Goods findGoodsByName(String name) {
+        return goodsMapper.getGoodsByName(name);
+    }
+
+    /**
+     * 批量新增商品规模
+     *
+     * @param id
+     * @param goodsSpecsList
+     */
+    public void insertBatch(Long id, List<GoodsSpecs> goodsSpecsList) {
+        if (goodsSpecsList != null && goodsSpecsList.size() > 0) {
+            goodsSpecsList.forEach((item) -> {
+                item.setGoodsId(id.intValue());
             });
             goodsSpecsMapper.insertBatch(goodsSpecsList);
         }
     }
 
     /**
-     * 根据商品名称查询商品
-     * @param name
-     * @return
+     * 批量删除商品规模
+     *
+     * @param id
+     * @param goodsSpecsList
      */
-    public Goods findGoodsByName(String name){
-        return goodsMapper.getGoodsByName(name);
+    public void deleteBatchByGoodsId(Long id, List<GoodsSpecs> goodsSpecsList) {
+        if (goodsSpecsList != null && goodsSpecsList.size() > 0) {
+            goodsSpecsList.forEach((item) -> {
+                item.setGoodsId(id.intValue());
+            });
+            goodsSpecsMapper.deleteBatchByGoodsId(goodsSpecsList);
+        }
     }
 }

@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/goods")
@@ -30,11 +27,23 @@ public class GoodsController {
      */
     @PostMapping
     @ApiOperation(value = "新增商品")
-    public Result<String> insert(GoodsDTO goodsDTO){
+    public Result<String> insert(@RequestBody GoodsDTO goodsDTO){
         log.info("新增商品:{}",goodsDTO);
         goodsService.insert(goodsDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
-
+    /**
+     * 修改商品
+     * @param id
+     * @param goodsDTO
+     * @return
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "修改商品")
+    public Result<String> update(@PathVariable Long id, @RequestBody GoodsDTO goodsDTO){
+        log.info("修改商品:{}",goodsDTO);
+        goodsService.update(id,goodsDTO);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
 }

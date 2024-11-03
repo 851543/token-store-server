@@ -1,6 +1,7 @@
 package com.token.service;
 
 import com.token.dto.GoodsDTO;
+import com.token.entity.Goods;
 
 public interface GoodsService {
 
@@ -10,4 +11,12 @@ public interface GoodsService {
      * @return
      */
     void insert(GoodsDTO goodsDTO);
+
+    /**
+     * 修改商品
+     * @param id
+     * @param goodsDTO
+     * @return
+     */
+    void update(Long id, GoodsDTO goodsDTO);
 }
