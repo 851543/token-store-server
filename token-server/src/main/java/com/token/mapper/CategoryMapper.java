@@ -58,13 +58,4 @@ public interface CategoryMapper {
      */
     @Select("select * from category where name = #{name}")
     Category getCategoryByName(String name);
-
-    /**
-     * 修改分类状态数据
-     * @param id
-     * @param status
-     */
-    @AutoFill(OperationType.UPDATE)
-    @Update("update category set status=#{status} where id=#{id}")
-    void status(Long id, Long status);
 }

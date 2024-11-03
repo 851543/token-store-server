@@ -28,7 +28,7 @@
             <if test="name != null and name != ''">
                 name =#{name},
             </if>
-            <if test="status != null and status != ''">
+            <if test="status != null">
                 status =#{status},
             </if>
             <if test="updateTime != null">

@@ -104,6 +104,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param status
      */
     public void status(Long id, Long status) {
-        categoryMapper.status(id, status);
+        Category category = Category.builder().id(id).status(status.intValue()).build();
+        categoryMapper.update(category);
     }
 }
