@@ -28,7 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
      * @return
      */
     public void insert(CategoryDTO categoryDTO) {
-        //  TODO 分类名称唯一 新增前先查询是否存在该名称
         Category category = Category.builder().build();
         //  拷贝属性
         BeanUtils.copyProperties(categoryDTO, category);
