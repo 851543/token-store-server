@@ -1,7 +1,9 @@
 package com.token.service;
 
 import com.token.dto.GoodsDTO;
+import com.token.dto.GoodsPageQueryDTO;
 import com.token.entity.Goods;
+import com.token.result.PageResult;
 
 public interface GoodsService {
 
@@ -19,4 +21,20 @@ public interface GoodsService {
      * @return
      */
     void update(Long id, GoodsDTO goodsDTO);
+
+    /**
+     * 根据id批量删除
+     * @param ids
+     */
+    void delete(Long[] ids);
+
+    void getGoodsInfo(Long id);
+
+    /**
+     * 分页查询
+     * @param goodsPageQueryDTO
+     * @return
+     */
+    PageResult page(GoodsPageQueryDTO goodsPageQueryDTO);
+
 }
