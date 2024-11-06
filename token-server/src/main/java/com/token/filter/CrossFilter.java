@@ -1,7 +1,8 @@
-package com.token.config;
+package com.token.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -9,8 +10,9 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * 跨域配置类
  */
-@Configuration
-public class CorsFilterConfiguration {
+@Component
+@Slf4j
+public class CrossFilter {
 
     /**
      * 跨域过滤器
@@ -18,6 +20,7 @@ public class CorsFilterConfiguration {
      */
     @Bean
     public CorsFilter corsFilter() {
+        log.info("开始注册自定义跨域过滤器...");
         CorsConfiguration config = new CorsConfiguration();
         //放行哪些原始域
         config.addAllowedOriginPattern("*");
@@ -32,6 +35,6 @@ public class CorsFilterConfiguration {
         //添加映射路径
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**",config);
-        return new CorsFilter(corsConfigurationSource);
+        return new org.springframework.web.filter.CorsFilter(corsConfigurationSource);
     }
 }

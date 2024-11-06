@@ -6,6 +6,7 @@ import com.token.constant.*;
 import com.token.dto.EmployeeLoginDTO;
 import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
+import com.token.entity.LoginEmployee;
 import com.token.exception.AccountIsDisableException;
 import com.token.exception.AccountNotExistException;
 import com.token.exception.PasswordErrorException;
@@ -18,6 +19,11 @@ import com.token.utils.JwtUtil;
 import com.token.vo.EmployeeLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -37,6 +43,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     /**
      * 员工登陆
      *
@@ -44,15 +53,12 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return
      */
     public EmployeeLoginVO login(EmployeeLoginDTO employeeLoginDTO) {
-        Employee employee = employeeMapper.getByUsername(employeeLoginDTO.getUsername());
-        if (employee == null) {
-            // 账号不存在
-            throw new AccountNotExistException(MessageConstant.ACCOUNT_NOT_EXIST);
-        }
-        if (!employee.getPassword().equals(DigestUtils.md5DigestAsHex(employeeLoginDTO.getPassword().getBytes()))) {
-            // 密码错误
-            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
-        }
+        //  Security认证
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(employeeLoginDTO.getUsername(),DigestUtils.md5DigestAsHex(employeeLoginDTO.getPassword().getBytes()));
+        //  获取认证信息
+        Authentication authenticate = authenticationManager.authenticate(authenticationToken);
+        LoginEmployee loginEmployee = (LoginEmployee) authenticate.getPrincipal();
+        Employee employee = loginEmployee.getEmployee();
         if (employee.getStatus() == StatusConstant.DISABLE) {
             // 账号已禁用
             throw new AccountIsDisableException(MessageConstant.ACCOUNT_IS_DISABLE);
@@ -69,8 +75,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 claims
         );
 
-        // token令牌存入redis
-        redisTemplate.opsForValue().set(RedisKeyConstant.REDIS_ADMIN_TOKEN_KEY_ + employee.getId(), token, jwtProperties.getAdminTtl(), TimeUnit.SECONDS);
+        // authenticate的登陆对象信息存入redis
+        redisTemplate.opsForValue().set(RedisKeyConstant.TOKEN_ADMIN_LOGIN_INFO_KEY_ + employee.getId(), loginEmployee, jwtProperties.getAdminTtl(), TimeUnit.SECONDS);
 
         return EmployeeLoginVO.builder()
                 .id(employee.getId())
