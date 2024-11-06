@@ -6,7 +6,12 @@ package com.token.constant;
 public interface RedisKeyConstant {
 
     /**
-     *
+     *  token令牌
      */
-    String REDIS_ADMIN_TOKEN_KEY_ = "REDIS_ADMIN_TOKEN_KEY_";
+    String TOKEN_ADMIN_TOKEN_KEY_ = "TOKEN_ADMIN_TOKEN_KEY_";
+
+    /**
+     * 用户登陆信息
+     */
+    String TOKEN_ADMIN_LOGIN_INFO_KEY_ = "TOKEN_ADMIN_LOGIN_INFO_KEY_";
 }
