@@ -1,6 +1,7 @@
 package com.token.mapper;
 
 import com.token.dto.GoodsDTO;
+import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
 import org.apache.ibatis.annotations.Insert;
@@ -23,4 +24,10 @@ public interface GoodsSpecsMapper {
      * @param goodsSpecsList
      */
     void deleteBatchByGoodsId(List<GoodsSpecs> goodsSpecsList);
+
+    /**
+     *
+     * @param status
+     */
+    void upstatus(Employee.EmployeeBuilder status);
 }

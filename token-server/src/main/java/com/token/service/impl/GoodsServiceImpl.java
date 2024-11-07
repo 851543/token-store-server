@@ -4,6 +4,7 @@ import com.token.constant.DefaultPriceConstant;
 import com.token.constant.MessageConstant;
 import com.token.constant.StatusConstant;
 import com.token.dto.GoodsDTO;
+import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
 import com.token.exception.CategoryIdNotEmptyException;
@@ -86,6 +87,18 @@ public class GoodsServiceImpl implements GoodsService {
         //  新增一批规模数据
         insertBatch(id, goodsDTO.getGoodsSpecsList());
     }
+
+    /**
+     *修改商品状态
+     * @param id
+     * @param status
+     */
+    @Override
+    public void status(Long id, Long status) {
+       goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(),id);
+
+    }
+
 
     /**
      * 根据商品名称查询商品

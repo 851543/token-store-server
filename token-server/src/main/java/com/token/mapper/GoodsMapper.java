@@ -38,4 +38,6 @@ public interface GoodsMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void update(@Param("goods") Goods goods,@Param("id") Long id);
+
+
 }

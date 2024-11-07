@@ -19,4 +19,11 @@ public interface GoodsService {
      * @return
      */
     void update(Long id, GoodsDTO goodsDTO);
+
+    /**
+     *
+     * @param id
+     * @param status
+     */
+    void status(Long id, Long status);
 }
