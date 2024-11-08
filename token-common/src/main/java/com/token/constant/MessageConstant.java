@@ -33,6 +33,7 @@ public interface MessageConstant {
     String GOODS_NAME_IS_EXIST = "商品名称已存在";
     String USER_NOT_LOGIN = "用户未登录";
     String TOKEN_ERROR = "TOKEN错误";
-    String INSUFFICIENT_PERMISSIONS= "权限不足";
+    String INSUFFICIENT_PERMISSIONS = "权限不足";
     String AUTHENTICATION_FAILED = "认证失败";
+    String SETMEAL_NAME_NOT_EMPTY = "套餐名称不能为空";
 }

@@ -9,10 +9,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@ApiModel(description = "新增商品的数据模型")
+@ApiModel(description = "商品的数据模型")
 public class GoodsDTO {
-
-    private static final long serialVersionUID = 1L;
 
     @TableField(value="name")
     @ApiModelProperty(value="商品名称")
