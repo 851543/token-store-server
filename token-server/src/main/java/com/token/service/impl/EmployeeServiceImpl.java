@@ -8,8 +8,6 @@ import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
 import com.token.entity.LoginEmployee;
 import com.token.exception.AccountIsDisableException;
-import com.token.exception.AccountNotExistException;
-import com.token.exception.PasswordErrorException;
 import com.token.exception.UsernameIsExistException;
 import com.token.mapper.EmployeeMapper;
 import com.token.properties.JwtProperties;

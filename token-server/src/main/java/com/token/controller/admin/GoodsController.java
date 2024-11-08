@@ -46,4 +46,17 @@ public class GoodsController {
         goodsService.update(id,goodsDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
+
+    /**
+     * 删除商品
+     * @param ids
+     * @return
+     */
+    @DeleteMapping("/delete")
+    @ApiOperation("删除商品")
+    public Result<String> delete(@PathVariable Long[] ids){
+        log.info("删除商品：{}", ids.length);
+        goodsService.delete(ids);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
 }

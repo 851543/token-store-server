@@ -65,7 +65,6 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 修改商品
-     *
      * @param id
      * @param goodsDTO
      * @return
@@ -85,6 +84,15 @@ public class GoodsServiceImpl implements GoodsService {
         deleteBatchByGoodsId(id, goodsDTO.getGoodsSpecsList());
         //  新增一批规模数据
         insertBatch(id, goodsDTO.getGoodsSpecsList());
+    }
+
+    /**
+     * 删除商品
+     * @param ids
+     */
+    @Override
+    public void delete(Long[] ids) {
+        goodsMapper.delete(ids);
     }
 
     /**

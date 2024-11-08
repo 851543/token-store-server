@@ -19,4 +19,10 @@ public interface GoodsService {
      * @return
      */
     void update(Long id, GoodsDTO goodsDTO);
+
+    /**
+     * 删除商品
+     * @param ids
+     */
+    void delete(Long[] ids);
 }
