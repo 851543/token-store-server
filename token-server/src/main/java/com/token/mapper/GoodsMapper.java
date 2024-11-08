@@ -38,4 +38,10 @@ public interface GoodsMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void update(@Param("goods") Goods goods,@Param("id") Long id);
+
+    /**
+     * 根据id删除商品数据
+     * @param ids
+     */
+    void delete(Long[] ids);
 }
