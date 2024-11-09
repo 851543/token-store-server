@@ -37,4 +37,10 @@ public interface GoodsService {
      */
     PageResult page(GoodsPageQueryDTO goodsPageQueryDTO);
 
+    /**
+     * 修改商品状态
+     * @param id
+     * @param status
+     */
+    void status(Long id, Long status);
 }

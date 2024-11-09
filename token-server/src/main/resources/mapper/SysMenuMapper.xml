@@ -14,40 +14,40 @@
         update sys_menu
         <set>
             <if test="menuName != null and menuName != ''">
-                menu_name = #{menuName}
+                menu_name = #{menuName},
             </if>
             <if test="path != null and path != ''">
-                path = #{path}
+                path = #{path},
             </if>
             <if test="component != null and component != ''">
-                component = #{component}
+                component = #{component},
             </if>
             <if test="visible != null and visible != ''">
-                visible = #{visible}
+                visible = #{visible},
             </if>
             <if test="status != null and status != ''">
-                status = #{status}
+                status = #{status},
             </if>
             <if test="perms != null and perms != ''">
-                perms = #{perms}
+                perms = #{perms},
             </if>
             <if test="icon != null and icon != ''">
-                icon = #{icon}
+                icon = #{icon},
             </if>
             <if test="createBy != null">
-                create_by = #{createBy}
+                create_by = #{createBy},
             </if>
             <if test="createTime != null">
-                update_time = #{createTime}
+                update_time = #{createTime},
             </if>
             <if test="updateBy != null">
-                update_by = #{updateBy}
+                update_by = #{updateBy},
             </if>
             <if test="updateTime != null">
-                update_time = #{updateTime}
+                update_time = #{updateTime},
             </if>
             <if test="delFlag != null">
-                del_flag = #{delFlag}
+                del_flag = #{delFlag},
             </if>
             <if test="remark != null and remark != ''">
                 remark = #{remark}

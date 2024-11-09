@@ -8,6 +8,7 @@ import com.token.constant.StatusConstant;
 import com.token.dto.GoodsDTO;
 import com.token.dto.GoodsPageQueryDTO;
 import com.token.entity.Category;
+import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
 import com.token.exception.CategoryIdNotEmptyException;
@@ -115,6 +116,15 @@ public class GoodsServiceImpl implements GoodsService {
                 total(page.getTotal()).
                 records(page.getResult()).
                 build();
+    }
+
+    /**
+     *修改商品状态
+     * @param id
+     * @param status
+     */
+    public void status(Long id, Long status) {
+        goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(),id);
     }
 
 

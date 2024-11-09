@@ -87,4 +87,18 @@ public class GoodsController {
         log.info("分页查询：{}",goodsPageQueryDTO);
         return Result.success(goodsService.page(goodsPageQueryDTO));
     }
+
+    /**
+     * 修改商品状态
+     * @param status
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "修改商品状态")
+    @PostMapping("/status/{status}")
+    public Result<String> status(@PathVariable Long status, Long id){
+        log.info("修改了商品{}状态：{}",id,status);
+        goodsService.status(id,status);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
 }

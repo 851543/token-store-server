@@ -5,28 +5,28 @@
         update sys_role
         <set>
             <if test="name != null and name != ''">
-                name = #{name}
+                name = #{name},
             </if>
             <if test="roleKey != null and roleKey != ''">
-                role_key = #{roleKey}
+                role_key = #{roleKey},
             </if>
             <if test="status != null and status != ''">
-                status = #{status}
+                status = #{status},
             </if>
             <if test="delFlag != null and delFlag != ''">
-                del_flag = #{delFlag}
+                del_flag = #{delFlag},
             </if>
             <if test="createBy != null">
-                create_by = #{createBy}
+                create_by = #{createBy},
             </if>
             <if test="createTime != null">
-                create_time = #{createTime}
+                create_time = #{createTime},
             </if>
             <if test="updateBy != null">
-                update_by = #{updateBy}
+                update_by = #{updateBy},
             </if>
             <if test="updateTime != null">
-                update_time = #{updateTime}
+                update_time = #{updateTime},
             </if>
             <if test="remark != null and remark != ''">
                 remark = #{remark}
