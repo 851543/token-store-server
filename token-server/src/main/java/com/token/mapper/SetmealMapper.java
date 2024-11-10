@@ -15,4 +15,7 @@ public interface SetmealMapper {
     @AutoFill(OperationType.INSERT)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Setmeal setmeal);
+
+    @AutoFill(OperationType.UPDATE)
+    void update(Setmeal setmeal);
 }
