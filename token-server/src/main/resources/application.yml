@@ -45,6 +45,16 @@ token:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: Authentication
+
+    # common端令牌配置
+    # 设置jwt签名加密时使用的秘钥
+    common-secret-key: token-store
+    # 设置jwt过期时间
+    common-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    common-token-name: Authentication
+
+
   # 阿里云存储
   alioss:
     endpoint: ${token.alioss.endpoint}
