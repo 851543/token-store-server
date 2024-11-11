@@ -1,9 +1,13 @@
 package com.token.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.token.constant.DefaultPriceConstant;
 import com.token.constant.MessageConstant;
 import com.token.constant.StatusConstant;
 import com.token.dto.GoodsDTO;
+import com.token.dto.GoodsPageQueryDTO;
+import com.token.entity.Category;
 import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
@@ -12,6 +16,7 @@ import com.token.exception.GoodsNameIsExistException;
 import com.token.exception.GoodsNameNotEmptyException;
 import com.token.mapper.GoodsMapper;
 import com.token.mapper.GoodsSpecsMapper;
+import com.token.result.PageResult;
 import com.token.service.GoodsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -89,14 +94,37 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
+     * 根据id批量删除
+     * @param ids
+     */
+    public void delete(Long[] ids) {
+        goodsMapper.delete(ids);
+    }
+
+    /**
+     * 根据id查询商品信息
+     * @param id
+     */
+    public void getGoodsInfo(Long id) {
+        goodsMapper.getGoodsById(id);
+    }
+
+    public PageResult page(GoodsPageQueryDTO goodsPageQueryDTO) {
+        PageHelper.startPage(goodsPageQueryDTO.getPageNow(), goodsPageQueryDTO.getPageSize());
+        Page<Goods> page = (Page<Goods>) goodsMapper.queryList(goodsPageQueryDTO);
+        return PageResult.builder().
+                total(page.getTotal()).
+                records(page.getResult()).
+                build();
+    }
+
+    /**
      *修改商品状态
      * @param id
      * @param status
      */
-    @Override
     public void status(Long id, Long status) {
-       goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(),id);
-
+        goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(),id);
     }
 
 

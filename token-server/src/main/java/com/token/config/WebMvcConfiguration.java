@@ -1,6 +1,7 @@
 package com.token.config;
 
 import com.token.interceptor.AdminJwtTokenInterceptor;
+import com.token.interceptor.CommonJwtTokenInterceptor;
 import com.token.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Autowired
     private AdminJwtTokenInterceptor adminJwtTokenInterceptor;
+    @Autowired
+    private CommonJwtTokenInterceptor commonJwtTokenInterceptor;
 
     /**
      * 注册自定义拦截器
@@ -40,6 +43,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(adminJwtTokenInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+        registry.addInterceptor(commonJwtTokenInterceptor)
+                .addPathPatterns("/common/**");
     }
 
     /**

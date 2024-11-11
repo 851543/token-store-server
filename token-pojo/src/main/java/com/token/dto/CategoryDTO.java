@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 @Data
-@ApiModel(description = "新增分类的数据模型")
+@ApiModel(description = "分类的数据模型")
 public class CategoryDTO {
 
     @TableId(value = "type")
