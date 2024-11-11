@@ -73,7 +73,7 @@ public class GoodsController {
     public Result<Goods> selectById(@PathVariable Long id){
         log.info("查询了商品：{}",id);
         goodsService.getGoodsInfo(id);
-        return Result.success(MessageConstant.OPERATE_SUCCESS);
+        return Result.success(goodsService.getGoodsInfo(id));
     }
 
     /**

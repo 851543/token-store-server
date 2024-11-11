@@ -14,4 +14,5 @@ public interface StatusConstant {
      * 启用
      */
     Integer ENABLE = 1 ;
+
 }

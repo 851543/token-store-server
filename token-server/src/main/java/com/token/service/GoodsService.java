@@ -28,7 +28,7 @@ public interface GoodsService {
      */
     void delete(Long[] ids);
 
-    void getGoodsInfo(Long id);
+    Goods getGoodsInfo(Long id);
 
     /**
      * 分页查询

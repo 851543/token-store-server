@@ -7,8 +7,6 @@ import com.token.constant.MessageConstant;
 import com.token.constant.StatusConstant;
 import com.token.dto.GoodsDTO;
 import com.token.dto.GoodsPageQueryDTO;
-import com.token.entity.Category;
-import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
 import com.token.exception.CategoryIdNotEmptyException;
@@ -103,10 +101,12 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 根据id查询商品信息
+     *
      * @param id
+     * @return
      */
-    public void getGoodsInfo(Long id) {
-        goodsMapper.getGoodsById(id);
+    public Goods getGoodsInfo(Long id) {
+        return goodsMapper.getGoodsById(id);
     }
 
     public PageResult page(GoodsPageQueryDTO goodsPageQueryDTO) {

@@ -60,11 +60,11 @@ public class CategoryController {
      * @param categoryDTO
      * @return
      */
-    @PostMapping("/update")
+    @PostMapping("/update/{id}")
     @ApiOperation(value = "修改分类信息")
-    public Result<String> update(CategoryDTO categoryDTO) {
-        log.info("修改了分类{}",categoryDTO);
-        categoryService.update(categoryDTO);
+    public Result<String> update(@PathVariable Long id, CategoryDTO categoryDTO) {
+        log.info("修改了{}分类：{}",id,categoryDTO);
+        categoryService.update(categoryDTO,id);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
