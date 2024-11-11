@@ -60,4 +60,7 @@ public interface EmployeeMapper {
      */
     @Select("select * from employee where id = #{id}")
     Employee getEmployeeById(Long id);
+
+
+    List<Long> getStatusByids(Long[] ids);
 }

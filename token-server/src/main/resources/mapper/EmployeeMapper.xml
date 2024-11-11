@@ -58,4 +58,14 @@
         </where>
         order by create_time desc
     </select>
+    <select id="getStatusByids" resultType="com.token.entity.Employee">
+        select id from employee
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
 </mapper>

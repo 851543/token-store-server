@@ -43,4 +43,14 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getStatusByids" resultType="com.token.entity.Category">
+        select id from category
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
 </mapper>

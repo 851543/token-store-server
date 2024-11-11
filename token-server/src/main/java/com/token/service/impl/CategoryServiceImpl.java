@@ -7,6 +7,7 @@ import com.token.constant.StatusConstant;
 import com.token.dto.CategoryDTO;
 import com.token.dto.CategoryPageQueryDTO;
 import com.token.entity.Category;
+import com.token.exception.AccountIsDisableException;
 import com.token.exception.CategoryIsExistException;
 import com.token.mapper.CategoryMapper;
 import com.token.result.PageResult;
@@ -15,6 +16,8 @@ import com.token.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -46,6 +49,13 @@ public class CategoryServiceImpl implements CategoryService {
      * @param ids
      */
     public void delete(Long[] ids) {
+        //校验员工状态
+        List<Long> status = categoryMapper.getStatusByids(ids);
+        System.out.println(status);
+        if(status.size() > 0) {
+            //抛出异常
+            throw new AccountIsDisableException(MessageConstant.CATEGORY_STATUS_IS_ENABLE);
+        }
         categoryMapper.delete(ids);
     }
 
