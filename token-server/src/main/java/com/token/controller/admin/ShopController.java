@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "店铺")
 @Slf4j
 public class ShopController {
-    // TODO 使用redis 设置店铺状态和获取店铺状态
     @Autowired
     private RedisTemplate redisTemplate;
 
