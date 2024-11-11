@@ -54,11 +54,12 @@ public class CategoryServiceImpl implements CategoryService {
      *
      * @param categoryDTO
      */
-    public void update(CategoryDTO categoryDTO) {
+    public void update(CategoryDTO categoryDTO, Long id) {
         Category category = Category.builder().build();
         //  拷贝属性
         BeanUtils.copyProperties(categoryDTO, category);
         Category categoryByName = categoryMapper.getCategoryByName(category.getName());
+        category.setId(id);
         if(categoryByName != null){
             categoryMapper.update(category);
         }else {
