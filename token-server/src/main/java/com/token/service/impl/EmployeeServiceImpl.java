@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -115,7 +116,13 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param ids
      */
     public void delete(Long[] ids) {
-        //  TODO 启用的员工不能直接删除,需要先禁用
+        //校验员工状态
+        List<Long> status = employeeMapper.getStatusByids(ids);
+        System.out.println(status);
+        if(status.size() > 0) {
+            //抛出异常
+            throw new AccountIsDisableException(MessageConstant.EMPLOYEE_STATUS_IS_ENABLE);
+        }
         employeeMapper.delete(ids);
     }
 

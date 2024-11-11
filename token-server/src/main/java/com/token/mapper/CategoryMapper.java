@@ -57,4 +57,11 @@ public interface CategoryMapper {
      */
     @Select("select * from category where name = #{name}")
     Category getCategoryByName(String name);
+
+    /**
+     * 查询分类状态
+     * @param ids
+     * @return
+     */
+    List<Long> getStatusByids(Long[] ids);
 }
