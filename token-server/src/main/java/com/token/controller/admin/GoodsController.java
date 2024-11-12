@@ -52,18 +52,7 @@ public class GoodsController {
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
-    /**
-     * @param id
-     * @param status
-     * @return
-     */
-    @PostMapping ("/status/{status}")
-    @ApiOperation(value = "修改商品状态")
-    public Result<String> status(@PathVariable Long status, Long id) {
-        log.info("商品{}修改了状态{}", id, status);
-        goodsService.status(id, status);
-        return Result.success(MessageConstant.OPERATE_SUCCESS);
-    }
+
 
     /**
      * 根据id批量删除

@@ -67,4 +67,18 @@ public class SetmealServiceImpl implements SetmealService {
             setmealGoodsMapper.insertBatch(setmealGoodsList);
         }
     }
+
+    /**
+     *
+     * @param ids
+     */
+    public void delete(Long[] ids) {
+        List<Long> stauts=setmealMapper.getStatusByids(ids);
+//        System.out.println(stauts);
+        if (stauts.size() > 0){
+            throw new AccountIsDisableException(MessageConstant.SETMEAL_STATUS_IS_ENABLE);
+        }
+        setmealMapper.delete(ids);
+
+    }
 }

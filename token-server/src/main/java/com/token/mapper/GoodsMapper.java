@@ -58,4 +58,6 @@ public interface GoodsMapper {
      * @return
      */
     List<Goods> queryList(GoodsPageQueryDTO goodsPageQueryDTO);
+
+    List<Long> getGoodsByStatusId(Long[] ids);
 }

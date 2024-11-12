@@ -11,6 +11,7 @@ import com.token.entity.Category;
 import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
+import com.token.exception.AccountIsDisableException;
 import com.token.exception.CategoryIdNotEmptyException;
 import com.token.exception.GoodsNameIsExistException;
 import com.token.exception.GoodsNameNotEmptyException;
@@ -95,14 +96,20 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 根据id批量删除
+     *
      * @param ids
      */
     public void delete(Long[] ids) {
+        List<Long> stauts = goodsMapper.getGoodsByStatusId(ids);
+        if (stauts.size() > 0) {
+            throw new AccountIsDisableException(MessageConstant.GOODS_STATUS_IS_ENABLE);
+        }
         goodsMapper.delete(ids);
     }
 
     /**
      * 根据id查询商品信息
+     *
      * @param id
      */
     public void getGoodsInfo(Long id) {
@@ -119,12 +126,13 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
-     *修改商品状态
+     * 修改商品状态
+     *
      * @param id
      * @param status
      */
     public void status(Long id, Long status) {
-        goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(),id);
+        goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(), id);
     }
 
 

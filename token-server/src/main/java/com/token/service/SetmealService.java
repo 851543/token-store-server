@@ -9,4 +9,6 @@ public interface SetmealService {
      * @param setmealDTO
      */
     void add(SetmealDTO setmealDTO);
+
+    void delete(Long[] ids);
 }

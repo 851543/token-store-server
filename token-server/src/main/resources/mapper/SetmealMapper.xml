@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.token.mapper.SetmealGoodsMapper">
-    <insert id="insertBatch">
-        insert into setmeal_goods(setmeal_id, goods_id, name, price, copies) values
-        <foreach collection="setmealGoodsList" item="setmealGoods">
-            (#{setmealGoods.setmealId},#{setmealGoods.goodsId},#{setmealGoods.name},#{setmealGoods.price},#{setmealGoods.copies})
-        </foreach>
-    </insert>
+<mapper namespace="com.token.mapper.SetmealMapper">
+
     <delete id="delete">
         delete from setmeal
         <where>
@@ -16,4 +11,15 @@
             </foreach>
         </where>
     </delete>
+
+    <select id="getStatusByids" resultType="com.token.entity.Setmeal">
+        select id from setmeal
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
 </mapper>

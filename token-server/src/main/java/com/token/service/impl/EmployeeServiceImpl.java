@@ -118,7 +118,10 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     public void delete(Long[] ids) {
         //  TODO 启用的员工不能直接删除,需要先禁用
+
         employeeMapper.delete(ids);
+
+
     }
 
     /**

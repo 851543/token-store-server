@@ -31,9 +31,11 @@ public interface MessageConstant {
     String GOODS_NAME_NOT_EMPTY = "商品名称不能为空";
     String CATEGORY_ID_NOT_EMPTY = "分类id不能为空";
     String GOODS_NAME_IS_EXIST = "商品名称已存在";
+    String GOODS_STATUS_IS_ENABLE="商品状态为启用状态";
     String USER_NOT_LOGIN = "用户未登录";
     String TOKEN_ERROR = "TOKEN错误";
     String INSUFFICIENT_PERMISSIONS = "权限不足";
     String AUTHENTICATION_FAILED = "认证失败";
     String SETMEAL_NAME_NOT_EMPTY = "套餐名称不能为空";
+    String SETMEAL_STATUS_IS_ENABLE="套餐售卖状态为起售";
 }
