@@ -37,4 +37,25 @@
         </set>
         where id = #{id}
     </update>
+
+    <delete id="delete">
+        delete from setmeal
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+
+    <select id="getStatusByids" resultType="com.token.entity.Setmeal">
+        select id from setmeal
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
 </mapper>

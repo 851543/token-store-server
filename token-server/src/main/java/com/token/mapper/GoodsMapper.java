@@ -1,9 +1,7 @@
 package com.token.mapper;
 
 import com.token.annotation.AutoFill;
-import com.token.dto.CategoryPageQueryDTO;
-import com.token.dto.GoodsDTO;
-import com.token.entity.Category;
+import com.token.dto.GoodsPageQueryDTO;
 import com.token.entity.Goods;
 import com.token.enumeration.OperationType;
 import org.apache.ibatis.annotations.*;
@@ -40,8 +38,26 @@ public interface GoodsMapper {
     void update(@Param("goods") Goods goods,@Param("id") Long id);
 
     /**
-     * 根据id删除商品数据
+     * 根据id批量删除商品
+     *
      * @param ids
      */
     void delete(Long[] ids);
+
+    /**
+     * 根据id查询商品信息
+     * @param id
+     */
+    @Select("select * from goods where id = #{id}")
+    Goods getGoodsById(Long id);
+
+
+    /**
+     * 分页查询
+     * @param goodsPageQueryDTO
+     * @return
+     */
+    List<Goods> queryList(GoodsPageQueryDTO goodsPageQueryDTO);
+
+    List<Long> getGoodsByStatusId(Long[] ids);
 }

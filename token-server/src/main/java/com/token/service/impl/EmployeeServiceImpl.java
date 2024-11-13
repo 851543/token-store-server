@@ -8,6 +8,8 @@ import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
 import com.token.entity.LoginEmployee;
 import com.token.exception.AccountIsDisableException;
+import com.token.exception.AccountNotExistException;
+import com.token.exception.PasswordErrorException;
 import com.token.exception.UsernameIsExistException;
 import com.token.mapper.EmployeeMapper;
 import com.token.properties.JwtProperties;
@@ -26,7 +28,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 

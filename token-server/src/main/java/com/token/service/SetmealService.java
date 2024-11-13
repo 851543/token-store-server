@@ -1,7 +1,6 @@
 package com.token.service;
 
 import com.token.dto.SetmealDTO;
-import com.token.entity.Setmeal;
 
 public interface SetmealService {
 
@@ -23,4 +22,6 @@ public interface SetmealService {
      * @param setmealDTO
      */
     void edit(SetmealDTO setmealDTO);
+
+    void delete(Long[] ids);
 }

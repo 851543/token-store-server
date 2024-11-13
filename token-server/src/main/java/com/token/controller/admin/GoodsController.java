@@ -25,30 +25,34 @@ public class GoodsController {
 
     /**
      * 新增商品
+     *
      * @param goodsDTO
      * @return
      */
     @PostMapping
     @ApiOperation(value = "新增商品")
-    public Result<String> insert(@RequestBody GoodsDTO goodsDTO){
-        log.info("新增商品:{}",goodsDTO);
+    public Result<String> insert(@RequestBody GoodsDTO goodsDTO) {
+        log.info("新增商品:{}", goodsDTO);
         goodsService.insert(goodsDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
     /**
      * 修改商品
+     *
      * @param id
      * @param goodsDTO
      * @return
      */
     @PutMapping("/{id}")
     @ApiOperation(value = "修改商品")
-    public Result<String> update(@PathVariable Long id, @RequestBody GoodsDTO goodsDTO){
-        log.info("修改商品:{}",goodsDTO);
-        goodsService.update(id,goodsDTO);
+    public Result<String> update(@PathVariable Long id, @RequestBody GoodsDTO goodsDTO) {
+        log.info("修改商品:{}", goodsDTO);
+        goodsService.update(id, goodsDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
+
+
 
     /**
      * 删除商品

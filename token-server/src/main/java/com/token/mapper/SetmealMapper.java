@@ -18,4 +18,10 @@ public interface SetmealMapper {
 
     @AutoFill(OperationType.UPDATE)
     void update(Setmeal setmeal);
+
+
+
+    void delete(Long[] ids);
+
+    List<Long> getStatusByids(Long[] ids);
 }

@@ -94,18 +94,20 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
-     * 删除商品
+     * 根据id批量删除
      * @param ids
      */
     public void delete(Long[] ids) {
+        List<Long> stauts = goodsMapper.getGoodsByStatusId(ids);
+        if (stauts.size() > 0) {
+            throw new AccountIsDisableException(MessageConstant.GOODS_STATUS_IS_ENABLE);
+        }
         goodsMapper.delete(ids);
     }
 
     /**
      * 根据id查询商品信息
-     *
      * @param id
-     * @return
      */
     public Goods getGoodsInfo(Long id) {
         return goodsMapper.getGoodsById(id);
@@ -121,7 +123,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
-     *修改商品状态
+     * 修改商品状态
+     *
      * @param id
      * @param status
      */
