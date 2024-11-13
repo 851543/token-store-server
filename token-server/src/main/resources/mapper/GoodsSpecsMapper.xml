@@ -8,12 +8,12 @@
         </foreach>
     </insert>
 
-    <delete id="deleteBatchByGoodsId">
+    <delete id="deleteByGoodsIds">
         delete  from goods_specs
         <where>
             goods_id in
-            <foreach collection="goodsSpecsList" item="goodsSpecs" open="(" close=")" separator=",">
-                #{goodsSpecs.goodsId}
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
             </foreach>
         </where>
     </delete>

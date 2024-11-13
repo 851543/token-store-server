@@ -11,7 +11,7 @@ public interface SetmealService {
     void add(SetmealDTO setmealDTO);
 
     /**
-     * 回显套餐详情
+     * 获取套餐详情
      * @param id
      * @return
      */

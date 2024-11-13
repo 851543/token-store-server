@@ -3,14 +3,14 @@ package com.token.filter;
 import com.token.constant.JwtClaimsConstant;
 import com.token.constant.MessageConstant;
 import com.token.constant.RedisKeyConstant;
-import com.token.entity.LoginEmployee;
+import com.token.entity.EmployeeLoginDetails;
 import com.token.exception.JwtTokenAuthenticationFilterException;
 import com.token.properties.JwtProperties;
 import com.token.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,15 +25,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-
-@Component
+@AllArgsConstructor
 @Slf4j
 public class AdminJwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
     private JwtProperties jwtProperties;
 
-    @Autowired
     private RedisTemplate redisTemplate;
 
     @Override
@@ -58,13 +55,13 @@ public class AdminJwtTokenAuthenticationFilter extends OncePerRequestFilter {
         }
 
         //  从redis中获取员工信息
-        LoginEmployee loginEmployee = (LoginEmployee) redisTemplate.opsForValue().get(RedisKeyConstant.TOKEN_ADMIN_LOGIN_INFO_KEY_ + empId);
-        if (Objects.isNull(loginEmployee)) {
+        EmployeeLoginDetails employeeLoginDetails = (EmployeeLoginDetails) redisTemplate.opsForValue().get(RedisKeyConstant.TOKEN_ADMIN_LOGIN_INFO_KEY_ + empId);
+        if (Objects.isNull(employeeLoginDetails)) {
             throw new JwtTokenAuthenticationFilterException(MessageConstant.USER_NOT_LOGIN);
         }
 
         //  员工信息存入SecurityContextHolder
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginEmployee, null, loginEmployee.getAuthorities());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(employeeLoginDetails, null, employeeLoginDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         //  放行

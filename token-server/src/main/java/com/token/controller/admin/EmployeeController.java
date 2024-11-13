@@ -45,6 +45,7 @@ public class EmployeeController {
      * @param employee
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:employee:insert')")
     @ApiOperation(value = "新增员工")
     @PostMapping("/insert")
     public Result<String> insert(@RequestBody @Validated(value = Employee.Group.class) Employee employee) {
@@ -59,6 +60,7 @@ public class EmployeeController {
      * @param employee
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:employee:update')")
     @ApiOperation(value = "修改员工")
     @PostMapping("/update")
     public Result<String> update(@RequestBody Employee employee) {
@@ -74,6 +76,7 @@ public class EmployeeController {
      * @param ids
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:employee:delete')")
     @ApiOperation(value = "删除员工")
     @DeleteMapping("/delete")
     public Result<String> delete(@RequestParam Long[] ids) {
@@ -88,6 +91,7 @@ public class EmployeeController {
      * @param status
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:employee:update')")
     @ApiOperation(value = "修改员工状态")
     @PostMapping("/status/{status}")
     public Result<String> status(@PathVariable Long status, Long id) {
@@ -102,6 +106,7 @@ public class EmployeeController {
      * @param employeePageQueryDTO
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:employee:select')")
     @ApiOperation(value = "员工分页查询")
     @GetMapping("/page")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
@@ -116,6 +121,7 @@ public class EmployeeController {
      * @param id
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:employee:select')")
     @ApiOperation(value = "查询员工信息")
     @GetMapping("/personal/{id}")
     public  Result<Employee> personalInfo(@PathVariable Long id) {

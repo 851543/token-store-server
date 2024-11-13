@@ -32,7 +32,7 @@ public interface GoodsService {
      * 根据id查询商品信息
      * @param id
      */
-    void getGoodsInfo(Long id);
+    Goods getGoodsInfo(Long id);
 
     /**
      * 分页查询

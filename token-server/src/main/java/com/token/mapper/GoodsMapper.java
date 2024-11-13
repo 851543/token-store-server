@@ -59,5 +59,10 @@ public interface GoodsMapper {
      */
     List<Goods> queryList(GoodsPageQueryDTO goodsPageQueryDTO);
 
-    List<Long> getGoodsByStatusId(Long[] ids);
+    /**
+     * 根据id查询启用的商品
+     * @param ids
+     * @return
+     */
+    List<Long> getEnableStatusByIds(Long[] ids);
 }

@@ -92,6 +92,11 @@ public class SetmealServiceImpl implements SetmealService {
         return null;
     }
 
+    /**
+     * 新增商品关联表
+     * @param id
+     * @param setmealGoodsList
+     */
     public void insertBatch(Long id,List<SetmealGoods> setmealGoodsList) {
         // 关联商品表
         if (ObjectUtils.isNotEmpty(setmealGoodsList) && setmealGoodsList.size() > 0){
@@ -107,8 +112,8 @@ public class SetmealServiceImpl implements SetmealService {
      * @param ids
      */
     public void delete(Long[] ids) {
-        List<Long> stauts=setmealMapper.getStatusByids(ids);
-//        System.out.println(stauts);
+        //  TODO
+        List<Long> stauts = setmealMapper.getStatusByids(ids);
         if (stauts.size() > 0){
             throw new AccountIsDisableException(MessageConstant.SETMEAL_STATUS_IS_ENABLE);
         }

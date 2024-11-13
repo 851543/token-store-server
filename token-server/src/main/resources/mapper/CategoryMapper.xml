@@ -10,6 +10,16 @@
         </where>
         order by create_time desc
     </select>
+    <select id="getEnableStatusByIds" resultType="java.lang.Long">
+        select id from category
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
     <delete id="delete">
         delete from category
         <where>
@@ -19,7 +29,7 @@
             </foreach>
         </where>
     </delete>
-    <update id="update" >
+    <update id="update">
         update category
         <set>
             <if test="type != null and type != ''">
@@ -43,14 +53,5 @@
         </set>
         where id = #{id}
     </update>
-    <select id="getStatusByids" resultType="com.token.entity.Category">
-        select id from category
-        <where>
-            id in
-            <foreach collection="ids" item="id" open="(" close=")" separator=",">
-                #{id}
-            </foreach>
-        </where>
-        and status = 1
-    </select>
+
 </mapper>

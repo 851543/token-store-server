@@ -4,6 +4,7 @@ import com.token.dto.GoodsDTO;
 import com.token.entity.Employee;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -20,14 +21,8 @@ public interface GoodsSpecsMapper {
     void insertBatch(List<GoodsSpecs> goodsSpecsList);
 
     /**
-     * 根据商品ID删除一批商品规模数据
-     * @param goodsSpecsList
+     * 根据商品ID删除规模数据
+     * @param ids
      */
-    void deleteBatchByGoodsId(List<GoodsSpecs> goodsSpecsList);
-
-    /**
-     *
-     * @param status
-     */
-    void upstatus(Employee.EmployeeBuilder status);
+    void deleteByGoodsIds(Long[] ids);
 }
