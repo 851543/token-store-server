@@ -1,5 +1,6 @@
 package com.token.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.token.constant.DefaultPriceConstant;
@@ -9,6 +10,7 @@ import com.token.dto.GoodsDTO;
 import com.token.dto.GoodsPageQueryDTO;
 import com.token.entity.Goods;
 import com.token.entity.GoodsSpecs;
+import com.token.exception.AccountIsDisableException;
 import com.token.exception.CategoryIdNotEmptyException;
 import com.token.exception.GoodsNameIsExistException;
 import com.token.exception.GoodsNameNotEmptyException;
@@ -16,12 +18,15 @@ import com.token.mapper.GoodsMapper;
 import com.token.mapper.GoodsSpecsMapper;
 import com.token.result.PageResult;
 import com.token.service.GoodsService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -86,17 +91,25 @@ public class GoodsServiceImpl implements GoodsService {
 
         goodsMapper.update(goods, id);
         //  覆盖的方式处理商品规模
-        deleteBatchByGoodsId(id, goodsDTO.getGoodsSpecsList());
+        Long[] ids = new Long[1];
+        ids[0] = id;
+        goodsSpecsMapper.deleteByGoodsIds(ids);
         //  新增一批规模数据
         insertBatch(id, goodsDTO.getGoodsSpecsList());
     }
 
     /**
-     * 根据id批量删除
+     * 删除商品
      * @param ids
      */
+    @Transactional
     public void delete(Long[] ids) {
+        List<Long> status = goodsMapper.getEnableStatusByIds(ids);
+        if ((!ObjectUtils.isEmpty(status)) && status.size() > 0) {
+            throw new AccountIsDisableException(MessageConstant.GOODS_STATUS_IS_ENABLE);
+        }
         goodsMapper.delete(ids);
+        goodsSpecsMapper.deleteByGoodsIds(ids);
     }
 
     /**
@@ -124,7 +137,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @param status
      */
     public void status(Long id, Long status) {
-        goodsMapper.update(Goods.builder().id(id).status(status.intValue()).build(),id);
+        goodsMapper.update(Goods.builder().status(status.intValue()).build(),id);
     }
 
 
@@ -150,21 +163,6 @@ public class GoodsServiceImpl implements GoodsService {
                 item.setGoodsId(id.intValue());
             });
             goodsSpecsMapper.insertBatch(goodsSpecsList);
-        }
-    }
-
-    /**
-     * 批量删除商品规模
-     *
-     * @param id
-     * @param goodsSpecsList
-     */
-    public void deleteBatchByGoodsId(Long id, List<GoodsSpecs> goodsSpecsList) {
-        if (goodsSpecsList != null && goodsSpecsList.size() > 0) {
-            goodsSpecsList.forEach((item) -> {
-                item.setGoodsId(id.intValue());
-            });
-            goodsSpecsMapper.deleteBatchByGoodsId(goodsSpecsList);
         }
     }
 }

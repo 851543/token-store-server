@@ -3,12 +3,10 @@ package com.token.service.impl;
 import com.token.constant.DefaultPriceConstant;
 import com.token.constant.MessageConstant;
 import com.token.constant.StatusConstant;
-import com.token.dto.GoodsDTO;
 import com.token.dto.SetmealDTO;
 import com.token.entity.*;
 import com.token.exception.*;
 import com.token.mapper.*;
-import com.token.service.GoodsService;
 import com.token.service.SetmealService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -57,14 +55,69 @@ public class SetmealServiceImpl implements SetmealService {
         Setmeal setmeal = new Setmeal();
         BeanUtils.copyProperties(setmealDTO,setmeal);
         setmealMapper.insert(setmeal);
-
         // 关联商品表
-        List<SetmealGoods> setmealGoodsList = setmealDTO.getSetmealGoodsList();
+        insertBatch(setmeal.getId(),setmealDTO.getSetmealGoodsList());
+    }
+
+    /**
+     * 修改套餐
+     * @param setmealDTO
+     */
+    @Transactional
+    public void edit(SetmealDTO setmealDTO) {
+        Category category = categoryMapper.getCategoryById(Long.valueOf(setmealDTO.getCategoryId()));
+        if (ObjectUtils.isEmpty(category)){
+            throw new CategoryNotExistException(MessageConstant.CATEGORY_NOT_EXIST);
+        }
+        if (StringUtils.isEmpty(setmealDTO.getName())){
+            throw new SetmealNameNotEmptyException(MessageConstant.SETMEAL_NAME_NOT_EMPTY);
+        }
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO,setmeal);
+
+        setmealMapper.update(setmeal);
+
+        setmealGoodsMapper.deleteSetmealById(setmeal.getId());
+
+        insertBatch(setmeal.getId(),setmealDTO.getSetmealGoodsList());
+    }
+
+    /**
+     * 回显套餐详情
+     * @param id
+     * @return
+     */
+    @Override
+    public SetmealDTO getByIdSetmea(Long id) {
+        return null;
+    }
+
+    /**
+     * 新增商品关联表
+     * @param id
+     * @param setmealGoodsList
+     */
+    public void insertBatch(Long id,List<SetmealGoods> setmealGoodsList) {
+        // 关联商品表
         if (ObjectUtils.isNotEmpty(setmealGoodsList) && setmealGoodsList.size() > 0){
             setmealGoodsList.forEach((item)->{
-                item.setSetmealId(Math.toIntExact(setmeal.getId()));
+                item.setSetmealId(Math.toIntExact(id));
             });
             setmealGoodsMapper.insertBatch(setmealGoodsList);
         }
+    }
+
+    /**
+     *
+     * @param ids
+     */
+    public void delete(Long[] ids) {
+        //  TODO
+        List<Long> stauts = setmealMapper.getStatusByids(ids);
+        if (stauts.size() > 0){
+            throw new AccountIsDisableException(MessageConstant.SETMEAL_STATUS_IS_ENABLE);
+        }
+        setmealMapper.delete(ids);
+
     }
 }

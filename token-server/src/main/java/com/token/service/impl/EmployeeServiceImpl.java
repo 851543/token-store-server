@@ -6,12 +6,13 @@ import com.token.constant.*;
 import com.token.dto.EmployeeLoginDTO;
 import com.token.dto.EmployeePageQueryDTO;
 import com.token.entity.Employee;
-import com.token.entity.LoginEmployee;
+import com.token.entity.EmployeeLoginDetails;
 import com.token.exception.AccountIsDisableException;
 import com.token.exception.AccountNotExistException;
 import com.token.exception.PasswordErrorException;
 import com.token.exception.UsernameIsExistException;
 import com.token.mapper.EmployeeMapper;
+import com.token.mapper.SysRoleMapper;
 import com.token.properties.JwtProperties;
 import com.token.result.PageResult;
 import com.token.service.EmployeeService;
@@ -22,10 +23,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +48,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
+
     /**
      * 员工登陆
      *
@@ -58,8 +65,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(employeeLoginDTO.getUsername(),DigestUtils.md5DigestAsHex(employeeLoginDTO.getPassword().getBytes()));
         //  获取认证信息
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        LoginEmployee loginEmployee = (LoginEmployee) authenticate.getPrincipal();
-        Employee employee = loginEmployee.getEmployee();
+        //  员工登陆详细信息
+        EmployeeLoginDetails employeeLoginDetails = (EmployeeLoginDetails) authenticate.getPrincipal();
+        Employee employee = employeeLoginDetails.getEmployee();
         if (employee.getStatus() == StatusConstant.DISABLE) {
             // 账号已禁用
             throw new AccountIsDisableException(MessageConstant.ACCOUNT_IS_DISABLE);
@@ -77,7 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
 
         // authenticate的登陆对象信息存入redis
-        redisTemplate.opsForValue().set(RedisKeyConstant.TOKEN_ADMIN_LOGIN_INFO_KEY_ + employee.getId(), loginEmployee, jwtProperties.getAdminTtl(), TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisKeyConstant.TOKEN_ADMIN_LOGIN_INFO_KEY_ + employee.getId(), employeeLoginDetails, jwtProperties.getAdminTtl(), TimeUnit.SECONDS);
 
         return EmployeeLoginVO.builder()
                 .id(employee.getId())
@@ -94,12 +102,15 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     public void insert(Employee employee) {
         Employee ByEmployee = employeeMapper.getByUsername(employee.getUsername());
-        if (ByEmployee != null) {
+        if (!ObjectUtils.isEmpty(ByEmployee)) {
             throw new UsernameIsExistException(MessageConstant.USERNAME_IS_EXIST);
         }
-        employee.setPassword(DigestUtils.md5DigestAsHex(PassWordConstant.DEFAULT_PASSWORD.getBytes()));
+        employee.setPassword(passwordEncoder.encode(DigestUtils.md5DigestAsHex(employee.getPassword().getBytes())));
         employee.setStatus(StatusConstant.DISABLE);
         employeeMapper.insert(employee);
+
+        //  绑定角色表
+        sysRoleMapper.insertSysUserRole(employee.getId(),SysRoleConstant.EMPLOYEE);
     }
 
     /**
@@ -108,7 +119,12 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employee
      */
     public void update(Employee employee) {
-        employee.setPassword(DigestUtils.md5DigestAsHex(employee.getPassword().getBytes()));
+        Employee ByEmployee = employeeMapper.getByUsername(employee.getUsername());
+        if (!ObjectUtils.isEmpty(ByEmployee)) {
+            throw new UsernameIsExistException(MessageConstant.USERNAME_IS_EXIST);
+        }
+        //  二次加密
+        employee.setPassword(passwordEncoder.encode(DigestUtils.md5DigestAsHex(employee.getPassword().getBytes())));
         employeeMapper.update(employee);
     }
 
@@ -118,11 +134,10 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param ids
      */
     public void delete(Long[] ids) {
-        //校验员工状态
-        List<Long> status = employeeMapper.getStatusByids(ids);
-        System.out.println(status);
-        if(status.size() > 0) {
-            //抛出异常
+        //  校验员工状态
+        List<Long> status = employeeMapper.getEnableStatusByIds(ids);
+        if((!ObjectUtils.isEmpty(status)) && status.size() > 0) {
+            //  抛出异常
             throw new AccountIsDisableException(MessageConstant.EMPLOYEE_STATUS_IS_ENABLE);
         }
         employeeMapper.delete(ids);

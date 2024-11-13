@@ -18,5 +18,5 @@ public interface RedisKeyConstant {
     /**
      * 店铺状态
      */
-    String TOKEN_ADMIN_SHOP_STATUS_ = "TOKEN_ADMIN_SHOP_STATUS_";
+    String TOKEN_ADMIN_SHOP_STATUS = "TOKEN_ADMIN_SHOP_STATUS";
 }

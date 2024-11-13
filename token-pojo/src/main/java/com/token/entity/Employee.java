@@ -3,7 +3,6 @@ package com.token.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.token.annotation.Sex;
 import com.token.constant.MessageConstant;
-import com.token.dto.EmployeeLoginDTO;
 import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -11,13 +10,10 @@ import lombok.AllArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;

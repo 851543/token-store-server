@@ -10,26 +10,20 @@
             <if test="roleKey != null and roleKey != ''">
                 role_key = #{roleKey},
             </if>
-            <if test="status != null and status != ''">
+            <if test="status != null">
                 status = #{status},
-            </if>
-            <if test="delFlag != null and delFlag != ''">
-                del_flag = #{delFlag},
-            </if>
-            <if test="createBy != null">
-                create_by = #{createBy},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
             </if>
-            <if test="updateBy != null">
-                update_by = #{updateBy},
-            </if>
             <if test="updateTime != null">
                 update_time = #{updateTime},
             </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark}
+            <if test="createUser != null">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
             </if>
         </set>
     </update>

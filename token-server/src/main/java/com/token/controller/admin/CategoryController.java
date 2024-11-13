@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,7 @@ public class CategoryController {
      * 新增分类
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:category:insert')")
     @PostMapping
     @ApiOperation(value = "新增分类")
     public Result<String> insert(@RequestBody @Validated CategoryDTO categoryDTO) {
@@ -47,6 +49,7 @@ public class CategoryController {
      * @param ids
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:category:delete')")
     @DeleteMapping
     @ApiOperation(value = "删除分类")
     public Result<String> delete(Long[] ids) {
@@ -60,6 +63,7 @@ public class CategoryController {
      * @param categoryDTO
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:category:update')")
     @PostMapping("/update/{id}")
     @ApiOperation(value = "修改分类信息")
     public Result<String> update(@PathVariable Long id, CategoryDTO categoryDTO) {
@@ -73,6 +77,7 @@ public class CategoryController {
      * @param id
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:category:select')")
     @GetMapping("/{id}")
     @ApiOperation(value = "查询分类信息")
    public Result<Category> personalInfo(@PathVariable Long id){
@@ -85,6 +90,7 @@ public class CategoryController {
      * @param categoryPageQueryDTO
      * @return
      */
+   @PreAuthorize("@ss.hasPermi('admin:category:select')")
    @GetMapping("/page")
    @ApiOperation(value = "分类分页查询")
    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
@@ -98,6 +104,7 @@ public class CategoryController {
      * @param Id
      * @return
      */
+   @PreAuthorize("@ss.hasPermi('admin:category:update')")
    @ApiOperation(value = "修改分类状态")
    @PostMapping("/status/{status}")
    public Result<String> status(@PathVariable Long status,@RequestParam @Id(message = "id为空") Long Id){

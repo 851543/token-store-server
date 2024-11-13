@@ -46,6 +46,7 @@
             </foreach>
         </where>
     </delete>
+
     <select id="queryList" resultType="com.token.entity.Goods">
         select * from goods
         <where>
@@ -55,4 +56,17 @@
         </where>
         order by create_time desc
     </select>
+
+    <select id="getEnableStatusByIds" resultType="java.lang.Long">
+        select id from setmeal
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
+
+
 </mapper>

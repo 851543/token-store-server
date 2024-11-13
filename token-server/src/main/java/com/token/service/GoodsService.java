@@ -23,11 +23,15 @@ public interface GoodsService {
     void update(Long id, GoodsDTO goodsDTO);
 
     /**
-     * 根据id批量删除
+     * 删除商品
      * @param ids
      */
     void delete(Long[] ids);
 
+    /**
+     * 根据id查询商品信息
+     * @param id
+     */
     Goods getGoodsInfo(Long id);
 
     /**

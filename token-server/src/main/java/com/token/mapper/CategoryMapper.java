@@ -5,7 +5,6 @@ import com.token.dto.CategoryPageQueryDTO;
 import com.token.entity.Category;
 import com.token.enumeration.OperationType;
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 
 @Mapper
@@ -60,9 +59,9 @@ public interface CategoryMapper {
     Category getCategoryByName(String name);
 
     /**
-     * 查询分类状态
+     * 根据id查询启用的分类
      * @param ids
      * @return
      */
-    List<Long> getStatusByids(Long[] ids);
+    List<Long> getEnableStatusByIds(Long[] ids);
 }

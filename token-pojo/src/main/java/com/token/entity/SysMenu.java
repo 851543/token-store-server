@@ -29,59 +29,35 @@ public class SysMenu  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value="id")
-    @ApiModelProperty(value="null")
+    @ApiModelProperty(value="主键")
     private Long id;
 
     @TableField(value="menu_name")
     @ApiModelProperty(value="菜单名")
     private String menuName;
 
-    @TableField(value="path")
-    @ApiModelProperty(value="路由地址")
-    private String path;
-
-    @TableField(value="component")
-    @ApiModelProperty(value="组件路径")
-    private String component;
-
-    @TableField(value="visible")
-    @ApiModelProperty(value="菜单状态（0显示 1隐藏）")
-    private String visible;
-
-    @TableField(value="status")
-    @ApiModelProperty(value="菜单状态（0正常 1停用）")
-    private String status;
-
     @TableField(value="perms")
     @ApiModelProperty(value="权限标识")
     private String perms;
 
-    @TableField(value="icon")
-    @ApiModelProperty(value="菜单图标")
-    private String icon;
-
-    @TableField(value="create_by")
-    @ApiModelProperty(value="null")
-    private Integer createBy;
+    @TableField(value="status")
+    @ApiModelProperty(value="菜单状态 0:禁用，1:启用")
+    private Integer status;
 
     @TableField(value="create_time")
-    @ApiModelProperty(value="null")
+    @ApiModelProperty(value="创建时间")
     private LocalDateTime createTime;
 
-    @TableField(value="update_by")
-    @ApiModelProperty(value="null")
-    private Integer updateBy;
-
     @TableField(value="update_time")
-    @ApiModelProperty(value="null")
+    @ApiModelProperty(value="更新时间")
     private LocalDateTime updateTime;
 
-    @TableField(value="del_flag")
-    @ApiModelProperty(value="是否删除（0未删除 1已删除）")
-    private Integer delFlag;
+    @TableField(value="create_user")
+    @ApiModelProperty(value="创建人")
+    private Integer createUser;
 
-    @TableField(value="remark")
-    @ApiModelProperty(value="备注")
-    private String remark;
+    @TableField(value="update_user")
+    @ApiModelProperty(value="修改人")
+    private Integer updateUser;
 
 }
