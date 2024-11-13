@@ -7,6 +7,7 @@ import com.token.constant.StatusConstant;
 import com.token.dto.CategoryDTO;
 import com.token.dto.CategoryPageQueryDTO;
 import com.token.entity.Category;
+import com.token.exception.AccountIsDisableException;
 import com.token.exception.CategoryIsExistException;
 import com.token.mapper.CategoryMapper;
 import com.token.result.PageResult;
@@ -15,6 +16,9 @@ import com.token.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -28,16 +32,16 @@ public class CategoryServiceImpl implements CategoryService {
      * @return
      */
     public void insert(CategoryDTO categoryDTO) {
+        Category categoryByName = categoryMapper.getCategoryByName(categoryDTO.getName());
+        if (!ObjectUtils.isEmpty(categoryByName)){
+            throw new CategoryIsExistException(MessageConstant.CATEGORY_EXIST);
+        }
         Category category = Category.builder().build();
         //  拷贝属性
         BeanUtils.copyProperties(categoryDTO, category);
         category.setStatus(StatusConstant.DISABLE);
-        Category categoryByName = categoryMapper.getCategoryByName(category.getName());
-        if(categoryByName == null){
-            categoryMapper.insert(category);
-        }else {
-            throw new CategoryIsExistException(MessageConstant.CATEGORY_EXIST);
-        }
+
+        categoryMapper.insert(category);
     }
 
     /**
@@ -46,6 +50,12 @@ public class CategoryServiceImpl implements CategoryService {
      * @param ids
      */
     public void delete(Long[] ids) {
+        //  校验员工状态
+        List<Long> status = categoryMapper.getEnableStatusByIds(ids);
+        if((!ObjectUtils.isEmpty(status)) && status.size() > 0) {
+            //  抛出异常
+            throw new AccountIsDisableException(MessageConstant.CATEGORY_STATUS_IS_ENABLE);
+        }
         categoryMapper.delete(ids);
     }
 
@@ -54,16 +64,19 @@ public class CategoryServiceImpl implements CategoryService {
      *
      * @param categoryDTO
      */
-    public void update(CategoryDTO categoryDTO) {
+    public void update(CategoryDTO categoryDTO, Long id) {
+        Category categoryByName = categoryMapper.getCategoryByName(categoryDTO.getName());
+        if (!ObjectUtils.isEmpty(categoryByName)){
+            throw new CategoryIsExistException(MessageConstant.CATEGORY_EXIST);
+        }
+
         Category category = Category.builder().build();
         //  拷贝属性
         BeanUtils.copyProperties(categoryDTO, category);
-        Category categoryByName = categoryMapper.getCategoryByName(category.getName());
-        if(categoryByName != null){
-            categoryMapper.update(category);
-        }else {
-            throw new CategoryIsExistException(MessageConstant.CATEGORY_NOT_EXIST);
-        }
+
+        category.setId(id);
+
+        categoryMapper.update(category);
     }
 
     /**

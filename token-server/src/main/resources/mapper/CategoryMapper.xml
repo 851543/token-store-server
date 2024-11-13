@@ -10,6 +10,16 @@
         </where>
         order by create_time desc
     </select>
+    <select id="getEnableStatusByIds" resultType="java.lang.Long">
+        select id from category
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+        and status = 1
+    </select>
     <delete id="delete">
         delete from category
         <where>
@@ -19,7 +29,7 @@
             </foreach>
         </where>
     </delete>
-    <update id="update" >
+    <update id="update">
         update category
         <set>
             <if test="type != null and type != ''">
@@ -27,6 +37,9 @@
             </if>
             <if test="name != null and name != ''">
                 name =#{name},
+            </if>
+            <if test="sort != null">
+                sort =#{sort},
             </if>
             <if test="status != null">
                 status =#{status},
@@ -40,4 +53,5 @@
         </set>
         where id = #{id}
     </update>
+
 </mapper>

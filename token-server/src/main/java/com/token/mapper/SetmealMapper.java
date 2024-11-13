@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
+import java.util.List;
+
 @Mapper
 public interface SetmealMapper {
 
@@ -15,4 +17,13 @@ public interface SetmealMapper {
     @AutoFill(OperationType.INSERT)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Setmeal setmeal);
+
+    @AutoFill(OperationType.UPDATE)
+    void update(Setmeal setmeal);
+
+
+
+    void delete(Long[] ids);
+
+    List<Long> getStatusByids(Long[] ids);
 }

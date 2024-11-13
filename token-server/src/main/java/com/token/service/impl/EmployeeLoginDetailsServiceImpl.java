@@ -2,7 +2,7 @@ package com.token.service.impl;
 
 import com.token.constant.MessageConstant;
 import com.token.entity.Employee;
-import com.token.entity.LoginEmployee;
+import com.token.entity.EmployeeLoginDetails;
 import com.token.exception.AccountNotExistException;
 import com.token.mapper.EmployeeMapper;
 import com.token.mapper.SysMenuMapper;
@@ -13,12 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 @Service
-public class EmployeeDetailsServiceImpl implements UserDetailsService {
+public class EmployeeLoginDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
@@ -33,7 +31,7 @@ public class EmployeeDetailsServiceImpl implements UserDetailsService {
             throw new AccountNotExistException(MessageConstant.ACCOUNT_NOT_EXIST);
         }
         //  查询员工的权限
-        List<String> permissionKeyList =  sysMenuMapper.getPermsById(employee.getId());
-        return new LoginEmployee(employee,new ArrayList<>(Arrays.asList("test")));
+        Set<String> permissionKeyList =  sysMenuMapper.getPermsById(employee.getId());
+        return new EmployeeLoginDetails(employee,permissionKeyList);
     }
 }

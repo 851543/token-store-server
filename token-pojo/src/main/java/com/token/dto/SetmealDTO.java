@@ -15,6 +15,10 @@ import java.util.List;
 @ApiModel(description = "套餐的数据模型")
 public class SetmealDTO {
 
+    @TableId(value="id")
+    @ApiModelProperty(value="主键")
+    private Long id;
+
     @TableField(value="category_id")
     @ApiModelProperty(value="商品分类id")
     private Integer categoryId;

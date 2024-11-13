@@ -1,6 +1,5 @@
 package com.token.controller.admin;
 
-import com.alibaba.druid.support.logging.Log;
 import com.token.constant.MessageConstant;
 import com.token.dto.GoodsDTO;
 import com.token.dto.GoodsPageQueryDTO;
@@ -12,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,36 +25,43 @@ public class GoodsController {
 
     /**
      * 新增商品
+     *
      * @param goodsDTO
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:goods:insert')")
     @PostMapping
     @ApiOperation(value = "新增商品")
-    public Result<String> insert(@RequestBody GoodsDTO goodsDTO){
-        log.info("新增商品:{}",goodsDTO);
+    public Result<String> insert(@RequestBody GoodsDTO goodsDTO) {
+        log.info("新增商品:{}", goodsDTO);
         goodsService.insert(goodsDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
     /**
      * 修改商品
+     *
      * @param id
      * @param goodsDTO
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:goods:update')")
     @PutMapping("/{id}")
     @ApiOperation(value = "修改商品")
-    public Result<String> update(@PathVariable Long id, @RequestBody GoodsDTO goodsDTO){
-        log.info("修改商品:{}",goodsDTO);
-        goodsService.update(id,goodsDTO);
+    public Result<String> update(@PathVariable Long id, @RequestBody GoodsDTO goodsDTO) {
+        log.info("修改商品:{}", goodsDTO);
+        goodsService.update(id, goodsDTO);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
+
+
     /**
-     * 根据id批量删除
+     * 删除商品
      * @param ids
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:goods:delete')")
     @DeleteMapping
     @ApiOperation(value = "删除商品")
     public Result<String> delete(@RequestParam Long[] ids){
@@ -68,12 +75,12 @@ public class GoodsController {
      * @param id
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:goods:select')")
     @GetMapping("/info/{id}")
     @ApiOperation(value = "查询商品信息")
     public Result<Goods> selectById(@PathVariable Long id){
         log.info("查询了商品：{}",id);
-        goodsService.getGoodsInfo(id);
-        return Result.success(MessageConstant.OPERATE_SUCCESS);
+        return Result.success(goodsService.getGoodsInfo(id));
     }
 
     /**
@@ -81,6 +88,7 @@ public class GoodsController {
      * @param goodsPageQueryDTO
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:goods:select')")
     @GetMapping("/page")
     @ApiOperation(value = "商品分页查询")
     public Result<PageResult> page(GoodsPageQueryDTO goodsPageQueryDTO){
@@ -94,6 +102,7 @@ public class GoodsController {
      * @param id
      * @return
      */
+    @PreAuthorize("@ss.hasPermi('admin:goods:update')")
     @ApiOperation(value = "修改商品状态")
     @PostMapping("/status/{status}")
     public Result<String> status(@PathVariable Long status, Long id){

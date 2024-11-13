@@ -28,12 +28,16 @@ public interface MessageConstant {
     String CATEGORY_NAME_NOT_EMPTY = "分类名称不能为空";
     String CATEGORY_NOT_EXIST = "该分类不存在";
     String CATEGORY_EXIST = "该分类已存在";
+    String CATEGORY_STATUS_IS_ENABLE = "有分类状态为启用";
     String GOODS_NAME_NOT_EMPTY = "商品名称不能为空";
     String CATEGORY_ID_NOT_EMPTY = "分类id不能为空";
     String GOODS_NAME_IS_EXIST = "商品名称已存在";
+    String GOODS_STATUS_IS_ENABLE="商品状态为启用状态";
     String USER_NOT_LOGIN = "用户未登录";
     String TOKEN_ERROR = "TOKEN错误";
     String INSUFFICIENT_PERMISSIONS = "权限不足";
     String AUTHENTICATION_FAILED = "认证失败";
     String SETMEAL_NAME_NOT_EMPTY = "套餐名称不能为空";
+    String EMPLOYEE_STATUS_IS_ENABLE = "有用户状态为启用";
+    String SETMEAL_STATUS_IS_ENABLE="套餐售卖状态为起售";
 }
