@@ -3,7 +3,7 @@
 <mapper namespace="com.token.mapper.SetmealGoodsMapper">
     <insert id="insertBatch">
         insert into setmeal_goods(setmeal_id, goods_id, name, price, copies) values
-        <foreach collection="setmealGoodsList" item="setmealGoods">
+        <foreach collection="setmealGoodsList" item="setmealGoods" separator=",">
             (#{setmealGoods.setmealId},#{setmealGoods.goodsId},#{setmealGoods.name},#{setmealGoods.price},#{setmealGoods.copies})
         </foreach>
     </insert>

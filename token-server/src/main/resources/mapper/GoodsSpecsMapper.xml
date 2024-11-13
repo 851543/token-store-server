@@ -3,7 +3,7 @@
 <mapper namespace="com.token.mapper.GoodsSpecsMapper">
     <insert id="insertBatch">
         insert into goods_specs(goods_id, name, value) values
-        <foreach collection="goodsSpecsList" item="goodsSpecs" separator="">
+        <foreach collection="goodsSpecsList" item="goodsSpecs" separator=",">
             (#{goodsSpecs.goodsId},#{goodsSpecs.name},#{goodsSpecs.value})
         </foreach>
     </insert>

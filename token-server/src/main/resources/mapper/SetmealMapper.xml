@@ -5,22 +5,22 @@
         update setmeal
         <set>
             <if test="categoryId != null">
-                category_id = #{categoryId}
+                category_id = #{categoryId},
             </if>
             <if test="name != null and name != ''">
-                name = #{name}
+                name = #{name},
             </if>
             <if test="price != null">
-                price = #{price}
+                price = #{price},
             </if>
             <if test="status != null">
-                status = #{status}
+                status = #{status},
             </if>
             <if test="description != null and description != ''">
-                description = #{description}
+                description = #{description},
             </if>
             <if test="image != null and image != ''">
-                image = #{image}
+                image = #{image},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
@@ -32,7 +32,7 @@
                 create_user = #{createUser},
             </if>
             <if test="updateUser != null">
-                update_user = #{updateUser},
+                update_user = #{updateUser}
             </if>
         </set>
         where id = #{id}
