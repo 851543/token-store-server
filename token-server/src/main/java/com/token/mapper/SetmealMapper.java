@@ -21,9 +21,12 @@ public interface SetmealMapper {
     @AutoFill(OperationType.UPDATE)
     void update(Setmeal setmeal);
 
-
-
     void delete(Long[] ids);
 
-    List<Long> getStatusByids(Long[] ids);
+    /**
+     * 根据id查询启用的套餐
+     * @param ids
+     * @return
+     */
+    List<Long> getEnableStatusByIds(Long[] ids);
 }

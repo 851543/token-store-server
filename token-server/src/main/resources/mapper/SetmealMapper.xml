@@ -48,7 +48,7 @@
         </where>
     </delete>
 
-    <select id="getStatusByids" resultType="com.token.entity.Setmeal">
+    <select id="getEnableStatusByIds" resultType="java.lang.Long">
         select id from setmeal
         <where>
             id in

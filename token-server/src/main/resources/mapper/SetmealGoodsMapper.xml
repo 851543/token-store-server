@@ -7,6 +7,7 @@
             (#{setmealGoods.setmealId},#{setmealGoods.goodsId},#{setmealGoods.name},#{setmealGoods.price},#{setmealGoods.copies})
         </foreach>
     </insert>
+
     <delete id="delete">
         delete from setmeal
         <where>
@@ -14,6 +15,16 @@
             <foreach collection="ids" item="id" open="(" close=")" separator=",">
                 #{id}
             </foreach>
+        </where>
+    </delete>
+
+    <delete id="deleteByGoodsIds">
+        delete from setmeal_goods
+        <where>
+            setmeal_id in
+               <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                   #{id}
+               </foreach>
         </where>
     </delete>
 </mapper>
