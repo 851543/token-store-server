@@ -1,6 +1,7 @@
 package com.token.service;
 
 import com.token.dto.SetmealDTO;
+import com.token.entity.Setmeal;
 
 public interface SetmealService {
 
@@ -15,7 +16,7 @@ public interface SetmealService {
      * @param id
      * @return
      */
-    SetmealDTO getByIdSetmea(Long id);
+    Setmeal getByIdSetmea(Long id);
 
     /**
      * 修改套餐

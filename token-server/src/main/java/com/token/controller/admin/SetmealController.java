@@ -2,6 +2,7 @@ package com.token.controller.admin;
 
 import com.token.constant.MessageConstant;
 import com.token.dto.SetmealDTO;
+import com.token.entity.Setmeal;
 import com.token.result.Result;
 import com.token.service.SetmealService;
 import io.swagger.annotations.Api;
@@ -55,9 +56,11 @@ public class SetmealController {
      * @return
      */
     @PreAuthorize("@ss.hasPermi('admin:setmeal:select')")
-    public Result<SetmealDTO> get(Long id){
-        SetmealDTO setmealDTO = setmealService.getByIdSetmea(id);
-        return Result.success(setmealDTO);
+    @GetMapping
+    @ApiOperation(value = "获取套餐详情")
+    public Result<Setmeal> get(Long id){
+        Setmeal setmeal = setmealService.getByIdSetmea(id);
+        return Result.success(setmeal);
     }
 
 
