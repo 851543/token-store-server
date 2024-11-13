@@ -12,7 +12,7 @@ public interface SetmealService {
     void add(SetmealDTO setmealDTO);
 
     /**
-     * 获取套餐详情
+     * 回显套餐详情
      * @param id
      * @return
      */
@@ -24,5 +24,10 @@ public interface SetmealService {
      */
     void edit(SetmealDTO setmealDTO);
 
+    /**
+     * 删除套餐
+     * @param ids
+     * @return
+     */
     void delete(Long[] ids);
 }

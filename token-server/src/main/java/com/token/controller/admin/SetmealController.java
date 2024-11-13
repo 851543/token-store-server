@@ -2,7 +2,6 @@ package com.token.controller.admin;
 
 import com.token.constant.MessageConstant;
 import com.token.dto.SetmealDTO;
-import com.token.entity.Setmeal;
 import com.token.result.Result;
 import com.token.service.SetmealService;
 import io.swagger.annotations.Api;

@@ -6,7 +6,6 @@ import com.token.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -35,4 +34,10 @@ public interface SetmealMapper {
      */
     @Select("select * from setmeal where id = #{id};")
     Setmeal getByIdSetmea(Long id);
+    /**
+     * 根据id查询启用的套餐
+     * @param ids
+     * @return
+     */
+    List<Long> getEnableStatusByIds(Long[] ids);
 }

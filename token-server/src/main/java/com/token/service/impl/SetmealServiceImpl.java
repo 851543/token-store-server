@@ -77,7 +77,9 @@ public class SetmealServiceImpl implements SetmealService {
 
         setmealMapper.update(setmeal);
 
-        setmealGoodsMapper.deleteSetmealById(setmeal.getId());
+        Long[] ids = new Long[1];
+        ids[0] = setmeal.getId();
+        setmealGoodsMapper.deleteByGoodsIds(ids);
 
         insertBatch(setmeal.getId(),setmealDTO.getSetmealGoodsList());
     }
@@ -93,11 +95,6 @@ public class SetmealServiceImpl implements SetmealService {
         return setmealMapper.getByIdSetmea(id);
     }
 
-    /**
-     * 新增商品关联表
-     * @param id
-     * @param setmealGoodsList
-     */
     public void insertBatch(Long id,List<SetmealGoods> setmealGoodsList) {
         // 关联商品表
         if (ObjectUtils.isNotEmpty(setmealGoodsList) && setmealGoodsList.size() > 0){
@@ -109,16 +106,18 @@ public class SetmealServiceImpl implements SetmealService {
     }
 
     /**
-     *
+     * 删除套餐
      * @param ids
+     * @return
      */
+    @Transactional
     public void delete(Long[] ids) {
-        //  TODO
-        List<Long> stauts = setmealMapper.getStatusByids(ids);
-        if (stauts.size() > 0){
+        List<Long> status = setmealMapper.getEnableStatusByIds(ids);
+        if ((!ObjectUtils.isEmpty(status)) && status.size() > 0){
             throw new AccountIsDisableException(MessageConstant.SETMEAL_STATUS_IS_ENABLE);
         }
         setmealMapper.delete(ids);
-
+        //根据商品id删除
+        setmealGoodsMapper.deleteByGoodsIds(ids);
     }
 }
