@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 06/11/2024 19:48:44
+ Date: 13/11/2024 20:47:33
 */
 
 SET NAMES utf8mb4;
@@ -59,14 +59,14 @@ CREATE TABLE `category`  (
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_category_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品及套餐分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '商品及套餐分类' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES (23, 0, '新闻', 0, 0, '2024-11-01 16:37:24', '2024-11-01 16:37:24', 6, 6);
-INSERT INTO `category` VALUES (24, 0, '配送', 0, 0, '2024-11-01 17:15:35', '2024-11-01 17:15:35', 6, 6);
-INSERT INTO `category` VALUES (25, 0, '事实', 0, 0, '2024-11-01 17:15:44', '2024-11-01 17:15:44', 6, 6);
+INSERT INTO `category` VALUES (23, 0, '新闻', 0, 0, '2024-11-01 16:37:24', '2024-11-01 16:37:24', 1, 6);
+INSERT INTO `category` VALUES (24, 0, '配送', 0, 0, '2024-11-01 17:15:35', '2024-11-01 17:15:35', 1, 6);
+INSERT INTO `category` VALUES (25, 0, '事实', 0, 0, '2024-11-01 17:15:44', '2024-11-01 17:15:44', 1, 6);
 
 -- ----------------------------
 -- Table structure for employee
@@ -92,10 +92,8 @@ CREATE TABLE `employee`  (
 -- ----------------------------
 -- Records of employee
 -- ----------------------------
-INSERT INTO `employee` VALUES (6, '超级用户', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '13123556625', '男', '', 1, '2024-09-16 23:02:15', '2024-09-16 23:02:15', NULL, NULL);
-INSERT INTO `employee` VALUES (9, '猪bb', 'abcv', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', 0, '2024-09-17 18:01:32', '2024-10-12 16:32:23', 0, 6);
-INSERT INTO `employee` VALUES (14, 'pwc', 'qqq', '$2a$10$WiAmYaFywkNtMNgP1ke7Fuf/aNrmh/KCX9BZFLpz6k6Z.Cg6VO/wO', '13123556625', '男', '', 1, '2024-10-12 20:49:30', '2024-10-12 20:49:30', 6, 6);
-INSERT INTO `employee` VALUES (15, 'hh', 'hhh', 'e10adc3949ba59abbe56e057f20f883e', '13123556625', '男', '', 0, '2024-11-05 16:51:08', '2024-11-05 16:51:08', 14, 14);
+INSERT INTO `employee` VALUES (1, '超级管理员', 'admin', '$2a$10$ph63uunoGDi/ug9zTOH9JOndn564M9T.17bOCeOIYrkozcWaN8wWq', '', '男', '', 1, '2024-09-16 23:02:15', '2024-09-16 23:02:15', NULL, NULL);
+INSERT INTO `employee` VALUES (2, '员工', 'employee', '$2a$10$ph63uunoGDi/ug9zTOH9JOndn564M9T.17bOCeOIYrkozcWaN8wWq', '', '', '', 1, '2024-09-17 18:01:32', '2024-10-12 16:32:23', 1, 1);
 
 -- ----------------------------
 -- Table structure for goods
@@ -120,12 +118,11 @@ CREATE TABLE `goods`  (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES (70, '牛逼', 0, 0.00, '', '', 0, '2024-11-02 10:21:36', '2024-11-03 20:56:30', 6, 6);
-INSERT INTO `goods` VALUES (71, '梁雨烧烤', 23, NULL, '', '', 0, '2024-11-02 10:28:10', '2024-11-02 10:28:10', 6, 6);
-INSERT INTO `goods` VALUES (72, '蟒蛇', 23, 0.00, '', '', 0, '2024-11-02 10:28:48', '2024-11-02 10:28:48', 6, 6);
-INSERT INTO `goods` VALUES (73, '我也讨厌', 23, 0.00, '', '', 0, '2024-11-03 19:09:37', '2024-11-03 19:09:37', 6, 6);
-INSERT INTO `goods` VALUES (74, '哈哈', 23, 0.00, '', '', 0, '2024-11-03 19:10:26', '2024-11-03 19:10:26', 6, 6);
-INSERT INTO `goods` VALUES (75, '事实', 23, 0.00, '', '', 0, '2024-11-03 19:11:11', '2024-11-03 19:11:11', 6, 6);
+INSERT INTO `goods` VALUES (70, '牛逼', 0, 0.00, '', '', 0, '2024-11-02 10:21:36', '2024-11-03 20:56:30', 1, 6);
+INSERT INTO `goods` VALUES (71, '梁雨烧烤', 23, NULL, '', '', 0, '2024-11-02 10:28:10', '2024-11-02 10:28:10', 1, 6);
+INSERT INTO `goods` VALUES (72, '蟒蛇', 23, 0.00, '', '', 0, '2024-11-02 10:28:48', '2024-11-02 10:28:48', 1, 6);
+INSERT INTO `goods` VALUES (73, '我也讨厌', 23, 0.00, '', '', 0, '2024-11-03 19:09:37', '2024-11-03 19:09:37', 1, 6);
+INSERT INTO `goods` VALUES (75, '事实', 23, 0.00, '', '', 0, '2024-11-03 19:11:11', '2024-11-03 19:11:11', 1, 6);
 
 -- ----------------------------
 -- Table structure for goods_specs
@@ -225,11 +222,12 @@ CREATE TABLE `setmeal`  (
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_setmeal_name`(`name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of setmeal
 -- ----------------------------
+INSERT INTO `setmeal` VALUES (33, 23, '彭少套餐', 0.00, 0, '', '', '2024-11-08 10:31:53', '2024-11-08 10:31:53', 1, 14);
 
 -- ----------------------------
 -- Table structure for setmeal_goods
@@ -243,11 +241,12 @@ CREATE TABLE `setmeal_goods`  (
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品单价（冗余字段）',
   `copies` int NULL DEFAULT NULL COMMENT '商品份数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐商品关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '套餐商品关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of setmeal_goods
 -- ----------------------------
+INSERT INTO `setmeal_goods` VALUES (47, 33, 0, '', 0.00, 0);
 
 -- ----------------------------
 -- Table structure for shopping_cart
@@ -272,20 +271,6 @@ CREATE TABLE `shopping_cart`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for sys_emp_role
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role`  (
-  `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `role_id` bigint NOT NULL DEFAULT 0 COMMENT '角色id',
-  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_emp_role
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
@@ -293,17 +278,36 @@ CREATE TABLE `sys_menu`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
   `menu_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'NULL' COMMENT '菜单名',
   `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '权限标识',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态 0:禁用，1:启用',
+  `status` bigint NULL DEFAULT 0 COMMENT '菜单状态 0:禁用，1:启用',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `create_user` bigint NULL DEFAULT NULL COMMENT '创建人',
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
+INSERT INTO `sys_menu` VALUES (1, '全部菜单', '*:*:*', 1, '2024-11-11 15:51:49', '2024-11-11 15:51:49', 1, 1);
+INSERT INTO `sys_menu` VALUES (2, '员工新增', 'admin:employee:insert', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (3, '员工删除', 'admin:employee:delete', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (4, '员工修改', 'admin:employee:update', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (5, '员工查询', 'admin:employee:select', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (6, '分类新增', 'admin:category:insert', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (7, '分类删除', 'admin:category:delete', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (8, '分类修改', 'admin:category:update', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (9, '分类查询', 'admin:category:select', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (10, '商品新增', 'admin:goods:insert', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (11, '商品删除', 'admin:goods:delete', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (12, '商品修改', 'admin:goods:update', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (13, '商品查询', 'admin:goods:select', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (14, '套餐新增', 'admin:setmeal:insert', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (15, '套餐删除', 'admin:setmeal:delete', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (16, '套餐修改', 'admin:setmeal:update', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (17, '套餐查询', 'admin:setmeal:select', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (18, '店铺修改', 'admin:shop:update', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
+INSERT INTO `sys_menu` VALUES (19, '店铺查询', 'admin:shop:select', 1, '2024-11-13 17:33:47', '2024-11-13 17:33:47', 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -313,17 +317,19 @@ CREATE TABLE `sys_role`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '角色权限字符串',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '角色状态 0:禁用，1:启用',
+  `status` bigint NULL DEFAULT 0 COMMENT '角色状态 0:禁用，1:启用',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `create_user` bigint NULL DEFAULT NULL COMMENT '创建人',
   `update_user` bigint NULL DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
+INSERT INTO `sys_role` VALUES (1, '店长', 'storeManager', 1, '2024-11-11 15:43:56', '2024-11-11 15:43:56', 1, 14);
+INSERT INTO `sys_role` VALUES (2, '员工', 'employee', 1, '2024-11-11 15:44:55', '2024-11-11 15:44:55', 1, 14);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -333,11 +339,46 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色ID',
   `menu_id` bigint NOT NULL DEFAULT 0 COMMENT '菜单id',
   PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
+INSERT INTO `sys_role_menu` VALUES (1, 1);
+INSERT INTO `sys_role_menu` VALUES (2, 2);
+INSERT INTO `sys_role_menu` VALUES (2, 3);
+INSERT INTO `sys_role_menu` VALUES (2, 4);
+INSERT INTO `sys_role_menu` VALUES (2, 5);
+INSERT INTO `sys_role_menu` VALUES (2, 6);
+INSERT INTO `sys_role_menu` VALUES (2, 7);
+INSERT INTO `sys_role_menu` VALUES (2, 8);
+INSERT INTO `sys_role_menu` VALUES (2, 9);
+INSERT INTO `sys_role_menu` VALUES (2, 10);
+INSERT INTO `sys_role_menu` VALUES (2, 11);
+INSERT INTO `sys_role_menu` VALUES (2, 12);
+INSERT INTO `sys_role_menu` VALUES (2, 13);
+INSERT INTO `sys_role_menu` VALUES (2, 14);
+INSERT INTO `sys_role_menu` VALUES (2, 15);
+INSERT INTO `sys_role_menu` VALUES (2, 16);
+INSERT INTO `sys_role_menu` VALUES (2, 17);
+INSERT INTO `sys_role_menu` VALUES (2, 18);
+INSERT INTO `sys_role_menu` VALUES (2, 19);
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+  `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `role_id` bigint NOT NULL DEFAULT 0 COMMENT '角色id',
+  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES (1, 1);
+INSERT INTO `sys_user_role` VALUES (2, 2);
 
 -- ----------------------------
 -- Table structure for user
