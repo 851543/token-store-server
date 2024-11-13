@@ -1,6 +1,8 @@
 package com.token.service;
 
 import com.token.dto.SetmealDTO;
+import com.token.dto.SetmealQueryDTO;
+import com.token.result.PageResult;
 
 public interface SetmealService {
 
@@ -24,4 +26,9 @@ public interface SetmealService {
     void edit(SetmealDTO setmealDTO);
 
     void delete(Long[] ids);
+
+    void status(Long id, Long status);
+
+
+    PageResult page(SetmealQueryDTO setmealQueryDTO);
 }

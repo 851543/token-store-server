@@ -2,6 +2,8 @@ package com.token.controller.admin;
 
 import com.token.constant.MessageConstant;
 import com.token.dto.SetmealDTO;
+import com.token.dto.SetmealQueryDTO;
+import com.token.result.PageResult;
 import com.token.result.Result;
 import com.token.service.SetmealService;
 import io.swagger.annotations.Api;
@@ -72,5 +74,36 @@ public class SetmealController {
         setmealService.delete(ids);
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
+
+    /**
+     * 更改套餐状态
+     */
+    @PreAuthorize("@ss.hasPermi('admin:setmeal:update')")
+    @ApiOperation(value = "修改套餐状态")
+    @PostMapping("/status/{status}")
+    public  Result<String> Status(@PathVariable Long status,Long id){
+        log.info("修改商品{}状态{}",id,status);
+        setmealService.status(id,status);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
+
+    /**
+     分页查询
+     * @param
+     *
+     * @return
+     */
+
+    @PreAuthorize("@ss.hasPermi('admin:setmeal:select')")
+    @PostMapping("/page")
+    @ApiOperation(value = "套餐分页查询")
+    public  Result<PageResult> page(SetmealQueryDTO setmealQueryDTO){
+        log.info("分页查询：{}",setmealQueryDTO);
+        return Result.success(setmealService.page(setmealQueryDTO));
+
+    }
+
+
+
 
 }

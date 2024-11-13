@@ -1,12 +1,16 @@
 package com.token.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.token.constant.DefaultPriceConstant;
 import com.token.constant.MessageConstant;
 import com.token.constant.StatusConstant;
 import com.token.dto.SetmealDTO;
+import com.token.dto.SetmealQueryDTO;
 import com.token.entity.*;
 import com.token.exception.*;
 import com.token.mapper.*;
+import com.token.result.PageResult;
 import com.token.service.SetmealService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -120,4 +124,22 @@ public class SetmealServiceImpl implements SetmealService {
         setmealMapper.delete(ids);
 
     }
+
+    @Override
+    public void status(Long id, Long status) {
+        Setmeal setmeal = Setmeal.builder().id(id).status(status.intValue()).build();
+        setmealMapper.update(setmeal);
+
+    }
+
+    @Override
+    public PageResult page(SetmealQueryDTO setmealQueryDTO) {
+        PageHelper.startPage(Integer.parseInt(setmealQueryDTO.getPageNow()),setmealQueryDTO.getPageSize());
+        Page<Setmeal> page=(Page<Setmeal>)  setmealMapper.queryList(setmealQueryDTO);
+        return PageResult.builder().
+                total(page.getTotal()).
+                records(page.getResult()).build();
+    }
+
+
 }
