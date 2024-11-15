@@ -3,6 +3,7 @@ package com.token.controller.admin;
 import com.token.constant.MessageConstant;
 import com.token.dto.SetmealDTO;
 import com.token.dto.SetmealQueryDTO;
+import com.token.entity.Setmeal;
 import com.token.result.PageResult;
 import com.token.result.Result;
 import com.token.service.SetmealService;
@@ -60,6 +61,7 @@ public class SetmealController {
     @GetMapping
     @ApiOperation(value = "获取套餐详情")
     public Result<Setmeal> get(Long id){
+        log.info("获取套餐详情:{}",id);
         Setmeal setmeal = setmealService.getByIdSetmea(id);
         return Result.success(setmeal);
     }
@@ -78,7 +80,10 @@ public class SetmealController {
     }
 
     /**
-     * 更改套餐状态
+     * 修改套餐状态
+     * @param status
+     * @param id
+     * @return
      */
     @PreAuthorize("@ss.hasPermi('admin:setmeal:update')")
     @ApiOperation(value = "修改套餐状态")
@@ -90,22 +95,15 @@ public class SetmealController {
     }
 
     /**
-     分页查询
-     * @param
-     *
+     * 套餐分页查询
+     * @param setmealQueryDTO
      * @return
      */
-
     @PreAuthorize("@ss.hasPermi('admin:setmeal:select')")
     @PostMapping("/page")
     @ApiOperation(value = "套餐分页查询")
     public  Result<PageResult> page(SetmealQueryDTO setmealQueryDTO){
         log.info("分页查询：{}",setmealQueryDTO);
         return Result.success(setmealService.page(setmealQueryDTO));
-
     }
-
-
-
-
 }

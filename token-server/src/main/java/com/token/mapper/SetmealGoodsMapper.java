@@ -17,9 +17,4 @@ public interface SetmealGoodsMapper {
      * @param ids
      */
     void deleteByGoodsIds(Long[] ids);
-
-    /**
-     *  根据id删除套餐商品关联数据
-     * @param id
-     */
 }

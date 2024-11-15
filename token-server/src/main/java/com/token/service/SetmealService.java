@@ -1,6 +1,9 @@
 package com.token.service;
 
 import com.token.dto.SetmealDTO;
+import com.token.dto.SetmealQueryDTO;
+import com.token.entity.Setmeal;
+import com.token.result.PageResult;
 
 public interface SetmealService {
 
@@ -15,7 +18,7 @@ public interface SetmealService {
      * @param id
      * @return
      */
-    SetmealDTO getByIdSetmea(Long id);
+    Setmeal getByIdSetmea(Long id);
 
     /**
      * 修改套餐
@@ -30,8 +33,18 @@ public interface SetmealService {
      */
     void delete(Long[] ids);
 
+    /**
+     * 修改套餐状态
+     * @param status
+     * @param id
+     * @return
+     */
     void status(Long id, Long status);
 
-
+    /**
+     * 套餐分页查询
+     * @param setmealQueryDTO
+     * @return
+     */
     PageResult page(SetmealQueryDTO setmealQueryDTO);
 }

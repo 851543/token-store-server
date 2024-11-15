@@ -58,4 +58,13 @@
         </where>
         and status = 1
     </select>
+    <select id="queryList" resultType="com.token.entity.Setmeal">
+        select * from setmeal
+        <where>
+            <if test="name != null and name != ii">
+            and name like concat('%',#{name},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 </mapper>
