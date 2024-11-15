@@ -45,4 +45,6 @@ public class SetmealDTO {
 
     @ApiModelProperty(value = "套餐商品关联列表")
     private List<SetmealGoods> setmealGoodsList;
+
+
 }

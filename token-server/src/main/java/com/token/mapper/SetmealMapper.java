@@ -40,4 +40,7 @@ public interface SetmealMapper {
      * @return
      */
     List<Long> getEnableStatusByIds(Long[] ids);
+
+
+    List<Setmeal> queryList(SetmealQueryDTO setmealQueryDTO);
 }
